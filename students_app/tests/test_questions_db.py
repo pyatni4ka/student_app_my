@@ -1,50 +1,83 @@
+"""Тесты для модуля работы с базой данных вопросов"""
 import unittest
 import os
 from utils.questions_db import QuestionsDB
 
 class TestQuestionsDB(unittest.TestCase):
+    """Тесты для класса QuestionsDB"""
+    
     def setUp(self):
         """Подготовка к тестам"""
-        self.db = QuestionsDB('test_questions.db')
-    
-    def test_lab_questions(self):
-        """Тест получения вопросов для лабораторной работы"""
-        # Проверяем каждую лабораторную работу
-        for lab_id in range(1, 4):
-            questions = self.db.get_random_questions(lab_id)
-            
-            # Проверяем наличие всех типов вопросов
-            self.assertEqual(len(questions['theory']), 2, f"Должно быть 2 теоретических вопроса для лабораторной {lab_id}")
-            self.assertEqual(len(questions['practice']), 2, f"Должно быть 2 практических задания для лабораторной {lab_id}")
-            self.assertIsNotNone(questions['graphics'], f"Должен быть 1 графический вопрос для лабораторной {lab_id}")
-            
-            # Проверяем структуру вопросов
-            for q in questions['theory']:
-                self.assertEqual(len(q), 2, "Теоретический вопрос должен содержать текст и ответ")
-            
-            for q in questions['practice']:
-                self.assertEqual(len(q), 2, "Практическое задание должно содержать текст и ответ")
-            
-            self.assertEqual(len(questions['graphics']), 3, "Графический вопрос должен содержать текст, ответ и путь к изображению")
-    
-    def test_lab_info(self):
-        """Тест получения информации о лабораторной работе"""
-        for lab_id in range(1, 4):
-            info = self.db.get_lab_info(lab_id)
-            self.assertIsNotNone(info, f"Должна быть информация о лабораторной {lab_id}")
-            self.assertEqual(len(info), 2, "Информация должна содержать название и описание")
-    
-    def test_all_labs(self):
-        """Тест получения списка всех лабораторных работ"""
-        labs = self.db.get_all_labs()
-        self.assertEqual(len(labs), 3, "Должно быть 3 лабораторные работы")
-        for lab in labs:
-            self.assertEqual(len(lab), 3, "Каждая запись должна содержать id, название и описание")
-    
+        self.db = QuestionsDB(':memory:')
+        self.db.create_tables()
+        
     def tearDown(self):
         """Очистка после тестов"""
-        if os.path.exists('test_questions.db'):
-            os.remove('test_questions.db')
+        self.db.close()
+        
+    def test_get_questions(self):
+        """Тест получения вопросов"""
+        # Проверяем получение вопросов по типам
+        theory_questions = self.db.get_questions('theory')
+        practice_questions = self.db.get_questions('practice')
+        graphics_questions = self.db.get_questions('graphics')
+        
+        # Проверяем что получаем списки
+        self.assertIsInstance(theory_questions, list)
+        self.assertIsInstance(practice_questions, list)
+        self.assertIsInstance(graphics_questions, list)
+        
+    def test_get_random_questions(self):
+        """Тест получения случайных вопросов"""
+        lab_id = 1
+        questions = self.db.get_random_questions(lab_id)
+        
+        # Проверяем что получаем словарь
+        self.assertIsInstance(questions, dict)
+        
+        # Проверяем наличие всех типов вопросов
+        self.assertIn('theory', questions)
+        self.assertIn('practice', questions)
+        self.assertIn('graphics', questions)
+        
+        # Проверяем количество вопросов
+        self.assertEqual(len(questions['theory']), 2)
+        self.assertEqual(len(questions['practice']), 2)
+        self.assertEqual(len(questions['graphics']), 1)
+        
+    def test_get_lab_details(self):
+        """Тест получения информации о лабораторной работе"""
+        lab_id = 1
+        lab_details = self.db.get_lab_details(lab_id)
+        
+        # Проверяем что получаем словарь
+        self.assertIsInstance(lab_details, dict)
+        
+        # Проверяем наличие необходимых полей
+        self.assertIn('title', lab_details)
+        self.assertIn('description', lab_details)
+        
+    def test_invalid_question_type(self):
+        """Тест обработки неверного типа вопроса"""
+        with self.assertRaises(ValueError):
+            self.db.get_questions('invalid_type')
+            
+    def test_invalid_lab_id(self):
+        """Тест обработки неверного ID лабораторной работы"""
+        with self.assertRaises(ValueError):
+            self.db.get_lab_details(-1)
+            
+    def test_empty_database(self):
+        """Тест работы с пустой базой данных"""
+        # Создаем новую пустую базу
+        empty_db = QuestionsDB(':memory:')
+        empty_db.create_tables()
+        
+        # Проверяем что получаем пустые списки/словари
+        self.assertEqual(empty_db.get_questions('theory'), [])
+        self.assertEqual(empty_db.get_random_questions(1), {'theory': [], 'practice': [], 'graphics': []})
+        
+        empty_db.close()
 
 if __name__ == '__main__':
     unittest.main()

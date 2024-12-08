@@ -1,6 +1,6 @@
 """Окно выбора лабораторной работы"""
 from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QLabel, QListWidget, 
-                           QPushButton, QMessageBox)
+                           QPushButton, QMessageBox, QDesktopWidget, QHBoxLayout)
 from PyQt5.QtCore import Qt
 from utils.questions_db import QuestionsDB
 from .test_history import TestHistoryWindow
@@ -8,49 +8,130 @@ from .test_window import TestWindow
 from .window_manager import WindowManager
 
 class LabSelectionWindow(QWidget):
-    def __init__(self, student_name, student_surname, student_group, student_id=None, parent=None):
+    def __init__(self, name, surname, group, parent=None):
         super().__init__(parent)
-        self.student_name = student_name
-        self.student_surname = student_surname
-        self.student_group = student_group
-        # Если student_id не передан, создаем его из имени, фамилии и группы
-        self.student_id = student_id or f"{student_surname}_{student_name}_{student_group}"
+        self.student_name = name
+        self.student_surname = surname
+        self.student_group = group
+        self.student_id = f"{surname}_{name}_{group}"  # Упрощенный идентификатор
         self.questions_db = QuestionsDB()
         self.setup_ui()
         self.load_labs()
+        self.showFullScreen()  # Разворачиваем окно на весь экран
 
     def setup_ui(self):
         """Настройка интерфейса"""
         self.setWindowTitle('Выбор лабораторной работы')
-        self.setMinimumWidth(400)
+        self.setMinimumWidth(1920)  # Устанавливаем минимальную ширину для FullHD
+        self.setMinimumHeight(1080)  # Устанавливаем минимальную высоту для FullHD
+        
+        # Создаем основной вертикальный layout
         layout = QVBoxLayout()
+        layout.setContentsMargins(50, 50, 50, 50)  # Добавляем отступы
+        layout.setSpacing(20)  # Увеличиваем расстояние между элементами
 
         # Информация о студенте
         student_info = QLabel(f'Студент: {self.student_name} {self.student_surname}\nГруппа: {self.student_group}')
         student_info.setAlignment(Qt.AlignCenter)
+        student_info.setStyleSheet("QLabel { font-size: 18pt; }")
         layout.addWidget(student_info)
+
+        # Заголовок списка лабораторных работ
+        labs_label = QLabel('Доступные лабораторные работы:')
+        labs_label.setStyleSheet("QLabel { font-size: 16pt; font-weight: bold; }")
+        layout.addWidget(labs_label)
 
         # Список лабораторных работ
         self.labs_list = QListWidget()
+        self.labs_list.setStyleSheet("""
+            QListWidget {
+                font-size: 14pt;
+                border: 2px solid #ccc;
+                border-radius: 10px;
+                padding: 10px;
+            }
+            QListWidget::item {
+                padding: 10px;
+                border-bottom: 1px solid #eee;
+            }
+            QListWidget::item:selected {
+                background-color: #0078d7;
+                color: white;
+            }
+        """)
         self.labs_list.itemDoubleClicked.connect(self.start_lab)
-        layout.addWidget(QLabel('Доступные лабораторные работы:'))
         layout.addWidget(self.labs_list)
 
-        # Кнопки
-        button_layout = QVBoxLayout()
+        # Создаем горизонтальный layout для кнопок
+        button_layout = QHBoxLayout()
+        button_layout.setSpacing(20)  # Расстояние между кнопками
+        
+        # Кнопка возврата в главное меню
+        self.back_button = QPushButton('Вернуться в главное меню')
+        self.back_button.setStyleSheet("""
+            QPushButton {
+                font-size: 14pt;
+                padding: 10px 20px;
+                background-color: #f0f0f0;
+                border: 2px solid #ccc;
+                border-radius: 5px;
+                min-width: 200px;
+            }
+            QPushButton:hover {
+                background-color: #e0e0e0;
+            }
+        """)
+        self.back_button.clicked.connect(self.return_to_main)
+        button_layout.addWidget(self.back_button)
         
         # Кнопка начала тестирования
         self.start_button = QPushButton('Начать тестирование')
+        self.start_button.setStyleSheet("""
+            QPushButton {
+                font-size: 14pt;
+                padding: 10px 20px;
+                background-color: #0078d7;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                min-width: 200px;
+            }
+            QPushButton:hover {
+                background-color: #0063b1;
+            }
+        """)
         self.start_button.clicked.connect(self.start_lab)
         button_layout.addWidget(self.start_button)
         
         # Кнопка истории тестирования
         self.history_button = QPushButton('История тестирования')
+        self.history_button.setStyleSheet("""
+            QPushButton {
+                font-size: 14pt;
+                padding: 10px 20px;
+                background-color: #107c10;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                min-width: 200px;
+            }
+            QPushButton:hover {
+                background-color: #0b590b;
+            }
+        """)
         self.history_button.clicked.connect(self.show_history)
         button_layout.addWidget(self.history_button)
-        
+
+        # Добавляем layout с кнопками в основной layout
         layout.addLayout(button_layout)
+        
         self.setLayout(layout)
+
+    def return_to_main(self):
+        """Возврат в главное меню"""
+        from .login_window import LoginWindow
+        WindowManager().show_window(LoginWindow, parent=self)
+        self.close()
 
     def load_labs(self):
         """Загрузка списка доступных лабораторных работ"""

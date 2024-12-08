@@ -29,17 +29,17 @@ class TestLogin(QtTestCase):
     def test_student_login_validation(self):
         """Тест валидации полей входа студента"""
         # Проверяем пустые поля
-        QTest.mouseClick(self.login_window.login_button, Qt.LeftButton)
-        self.assertFalse(self.login_window.isHidden())  # Окно не должно закрыться
+        self.click_button(self.login_window.login_button)
+        self.assertWindowVisible(self.login_window)
 
         # Проверяем только группу
-        self.login_window.group_input.setText("ПИ-231")
-        QTest.mouseClick(self.login_window.login_button, Qt.LeftButton)
-        self.assertFalse(self.login_window.isHidden())
+        self.enter_text(self.login_window.group_input, "ПИ-231")
+        self.click_button(self.login_window.login_button)
+        self.assertWindowVisible(self.login_window)
 
         # Проверяем полные данные
-        self.login_window.name_input.setText("Иван Иванов")
-        QTest.mouseClick(self.login_window.login_button, Qt.LeftButton)
+        self.enter_text(self.login_window.name_input, "Иван Иванов")
+        self.click_button(self.login_window.login_button)
         # Здесь должна быть проверка перехода к следующему окну
 
     def test_teacher_login_validation(self):

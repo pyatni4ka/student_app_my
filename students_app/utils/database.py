@@ -9,7 +9,7 @@ class Database:
         self.init_db()
     
     def init_db(self):
-        """Инициализация структуры базы данных"""
+        """Расширенная инициализация базы данных"""
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
             cursor.execute('''
@@ -18,6 +18,25 @@ class Database:
                     group_name TEXT NOT NULL,
                     student_name TEXT NOT NULL,
                     visit_date TEXT NOT NULL
+                )
+            ''')
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS sessions (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    student_id INTEGER,
+                    start_time TEXT NOT NULL,
+                    end_time TEXT,
+                    FOREIGN KEY (student_id) REFERENCES students(id)
+                )
+            ''')
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS grades (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    student_id INTEGER,
+                    lab_id INTEGER,
+                    grade INTEGER,
+                    date TEXT NOT NULL,
+                    FOREIGN KEY (student_id) REFERENCES students(id)
                 )
             ''')
             conn.commit()
@@ -74,6 +93,25 @@ class Database:
             cursor = conn.cursor()
             cursor.execute('DELETE FROM students')
             conn.commit()
+    
+    def start_session(self, student_id):
+        """Начало сессии работы студента"""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                'INSERT INTO sessions (student_id, start_time) VALUES (?, ?)',
+                (student_id, datetime.now().isoformat())
+            )
+            return cursor.lastrowid
+
+    def end_session(self, session_id):
+        """Завершение сессии"""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                'UPDATE sessions SET end_time = ? WHERE id = ?',
+                (datetime.now().isoformat(), session_id)
+            )
     
     def __del__(self):
         """Очистка тестовой базы данных при завершении"""

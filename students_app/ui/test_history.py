@@ -1,6 +1,6 @@
 """Окно истории тестирования"""
 from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QLabel, 
-                           QTableWidget, QTableWidgetItem)
+                           QTableWidget, QTableWidgetItem, QHeaderView)
 from PyQt5.QtCore import Qt
 from utils.questions_db import QuestionsDB
 import datetime
@@ -25,7 +25,7 @@ class TestHistoryWindow(QWidget):
         
         # Заголовок
         title = QLabel(f'История тестирования студента {self.student_surname}')
-        title.setAlignment(Qt.AlignCenter)
+        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(title)
         
         # Таблица с результатами

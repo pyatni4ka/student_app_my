@@ -258,3 +258,137 @@ Exception: РћС€РёР±РєР° РїСЂРё СЃРѕР·РґР°РЅРёРё РѕРєРЅР° РєР»Р°СЃСЃР° TeacherWin
 2024-12-08 15:05:36,464 - ui.window_manager - INFO - РЈСЃРїРµС€РЅРѕ РїРѕРєР°Р·Р°РЅРѕ РЅРѕРІРѕРµ РѕРєРЅРѕ РєР»Р°СЃСЃР° LabSelectionWindow
 2024-12-08 15:05:38,074 - ui.window_manager - INFO - РџРѕРїС‹С‚РєР° РїРѕРєР°Р·Р°С‚СЊ РѕРєРЅРѕ РєР»Р°СЃСЃР° TestHistoryWindow
 2024-12-08 15:05:38,075 - ui.window_manager - INFO - РЈСЃРїРµС€РЅРѕ РїРѕРєР°Р·Р°РЅРѕ РЅРѕРІРѕРµ РѕРєРЅРѕ РєР»Р°СЃСЃР° TestHistoryWindow
+2024-12-08 16:25:08,323 - ui.window_manager - INFO - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ WindowManager
+2024-12-08 16:25:08,324 - ui.window_manager - INFO - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ LoginWindow
+2024-12-08 16:25:09,082 - ui.window_manager - INFO - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ LoginWindow
+2024-12-08 16:25:35,662 - ui.window_manager - INFO - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ LabSelectionWindow
+2024-12-08 16:25:35,703 - ui.window_manager - INFO - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ LabSelectionWindow
+2024-12-08 16:25:37,316 - ui.window_manager - INFO - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ TestHistoryWindow
+2024-12-08 16:25:37,325 - ui.window_manager - INFO - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ TestHistoryWindow
+2024-12-08 16:50:37,772 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 16:50:37,773 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 16:50:38,374 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 16:52:07,603 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 16:52:07,603 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 16:52:08,180 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 16:58:38,367 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 16:58:38,368 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 16:58:38,912 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 17:01:10,013 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 17:01:10,014 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 17:01:10,596 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 17:01:18,588 - ui.window_manager - INFO - Попытка показать окно класса LabSelectionWindow
+2024-12-08 17:01:18,627 - ui.window_manager - INFO - Успешно показано новое окно класса LabSelectionWindow
+2024-12-08 17:01:20,813 - ui.window_manager - INFO - Попытка показать окно класса TestHistoryWindow
+2024-12-08 17:01:20,822 - ui.window_manager - INFO - Успешно показано новое окно класса TestHistoryWindow
+2024-12-08 17:23:34,499 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 17:23:34,499 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 17:23:35,347 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 17:39:14,113 - root - INFO - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 17:39:14,184 - __main__ - INFO - Qt version: 5.15.2
+2024-12-08 17:39:14,184 - __main__ - INFO - QT_PLUGIN_PATH: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 17:39:14,184 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 17:39:14,185 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 17:39:15,109 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 17:39:22,983 - ui.window_manager - INFO - Попытка показать окно класса LabSelectionWindow
+2024-12-08 17:39:23,035 - ui.window_manager - INFO - Успешно показано новое окно класса LabSelectionWindow
+2024-12-08 17:40:11,832 - ui.window_manager - INFO - Попытка показать окно класса TestWindow
+2024-12-08 17:40:11,839 - ui.window_manager - INFO - Успешно показано новое окно класса TestWindow
+2024-12-08 17:41:02,959 - root - INFO - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 17:41:02,974 - __main__ - INFO - Qt version: 5.15.2
+2024-12-08 17:41:02,974 - __main__ - INFO - QT_PLUGIN_PATH: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 17:41:02,975 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 17:41:02,975 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 17:41:03,606 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 17:41:30,926 - ui.window_manager - INFO - Попытка показать окно класса LabSelectionWindow
+2024-12-08 17:41:30,928 - ui.window_manager - INFO - Успешно показано новое окно класса LabSelectionWindow
+2024-12-08 17:41:39,290 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 17:41:39,324 - ui.window_manager - ERROR - Ошибка при создании окна: wrapped C/C++ object of type LoginWindow has been deleted
+Traceback (most recent call last):
+  File "c:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\window_manager.py", line 53, in show_window
+    self._windows[window_class].close()
+RuntimeError: wrapped C/C++ object of type LoginWindow has been deleted
+2024-12-08 17:42:03,034 - root - INFO - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 17:42:03,051 - __main__ - INFO - Qt version: 5.15.2
+2024-12-08 17:42:03,051 - __main__ - INFO - QT_PLUGIN_PATH: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 17:42:03,051 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 17:42:03,052 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 17:42:03,698 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 17:43:26,840 - root - INFO - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 17:43:26,857 - __main__ - INFO - Qt version: 5.15.2
+2024-12-08 17:43:26,858 - __main__ - INFO - QT_PLUGIN_PATH: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 17:43:26,858 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 17:43:26,858 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 17:43:27,498 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 17:45:06,145 - root - INFO - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 17:45:06,159 - __main__ - INFO - Qt version: 5.15.2
+2024-12-08 17:45:06,159 - __main__ - INFO - QT_PLUGIN_PATH: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 17:45:06,160 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 17:45:06,160 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 17:45:06,564 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 17:46:12,472 - root - INFO - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 17:46:12,489 - __main__ - INFO - Qt version: 5.15.2
+2024-12-08 17:46:12,490 - __main__ - INFO - QT_PLUGIN_PATH: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 17:46:12,490 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 17:46:12,490 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 17:46:12,943 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 17:47:36,796 - root - INFO - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 17:47:36,815 - __main__ - INFO - Qt version: 5.15.2
+2024-12-08 17:47:36,815 - __main__ - INFO - QT_PLUGIN_PATH: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 17:47:36,816 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 17:47:36,816 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 17:47:37,298 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 17:49:30,974 - root - INFO - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 17:49:30,990 - __main__ - INFO - Qt version: 5.15.2
+2024-12-08 17:49:30,990 - __main__ - INFO - QT_PLUGIN_PATH: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 17:49:30,990 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 17:49:30,992 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 17:49:31,411 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 17:50:16,783 - root - INFO - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 17:50:16,799 - __main__ - INFO - Qt version: 5.15.2
+2024-12-08 17:50:16,800 - __main__ - INFO - QT_PLUGIN_PATH: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 17:50:16,800 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 17:50:16,800 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 17:50:17,206 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 18:08:30,619 - root - INFO - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:08:30,635 - __main__ - INFO - Qt version: 5.15.2
+2024-12-08 18:08:30,635 - __main__ - INFO - QT_PLUGIN_PATH: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:08:30,635 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 18:08:30,635 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 18:08:31,051 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 18:18:08,472 - root - INFO - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:18:08,490 - __main__ - INFO - Qt version: 5.15.2
+2024-12-08 18:18:08,491 - __main__ - INFO - QT_PLUGIN_PATH: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:18:08,491 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 18:18:08,491 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 18:18:08,917 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 18:18:15,060 - root - INFO - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:18:15,079 - __main__ - INFO - Qt version: 5.15.2
+2024-12-08 18:18:15,079 - __main__ - INFO - QT_PLUGIN_PATH: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:18:15,080 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 18:18:15,081 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 18:18:15,481 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 18:19:19,388 - root - INFO - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:19:19,402 - __main__ - INFO - Qt version: 5.15.2
+2024-12-08 18:19:19,402 - __main__ - INFO - QT_PLUGIN_PATH: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:19:19,403 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 18:19:19,403 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 18:19:19,793 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 18:20:17,572 - root - INFO - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:20:17,587 - __main__ - INFO - Qt version: 5.15.2
+2024-12-08 18:20:17,587 - __main__ - INFO - QT_PLUGIN_PATH: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:20:17,587 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 18:20:17,587 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 18:20:17,976 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 18:31:37,641 - root - INFO - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:31:37,657 - __main__ - INFO - Qt version: 5.15.2
+2024-12-08 18:31:37,657 - __main__ - INFO - QT_PLUGIN_PATH: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:31:37,657 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 18:31:37,658 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 18:31:38,010 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 18:33:32,716 - root - INFO - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:33:32,732 - __main__ - INFO - Qt version: 5.15.2
+2024-12-08 18:33:32,732 - __main__ - INFO - QT_PLUGIN_PATH: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:33:32,733 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 18:33:32,733 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 18:33:33,096 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow

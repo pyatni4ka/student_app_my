@@ -1,9 +1,10 @@
 """Окно статистики"""
 from PyQt5.QtWidgets import (
     QDialog, QVBoxLayout, QLabel, QGridLayout, QWidget,
-    QComboBox, QHBoxLayout
+    QComboBox, QHBoxLayout, QMainWindow, QPushButton
 )
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtGui import QFont
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import numpy as np
@@ -67,9 +68,9 @@ class StatsWindow(QDialog):
             container_layout = QVBoxLayout(container)
             
             title_label = QLabel(title)
-            title_label.setAlignment(Qt.AlignCenter)
+            title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
             value_label = QLabel(value)
-            value_label.setAlignment(Qt.AlignCenter)
+            value_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
             value_label.setObjectName("stats-value")
             
             container_layout.addWidget(title_label)

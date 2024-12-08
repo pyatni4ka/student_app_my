@@ -3,27 +3,33 @@ import os
 import sys
 import re
 import json
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from datetime import datetime
+from typing import Optional
 from PyQt5.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
     QLabel, QLineEdit, QPushButton, QMessageBox, QGraphicsOpacityEffect,
-    QGraphicsDropShadowEffect
+    QGraphicsDropShadowEffect, QFrame
 )
-from PyQt5.QtCore import Qt, QSize, QTimer, QPropertyAnimation, QEasingCurve
-from PyQt5.QtGui import QPixmap, QIcon, QKeyEvent, QColor
+from PyQt5.QtCore import (
+    Qt, QSize, QTimer, QPropertyAnimation, QEasingCurve,
+    pyqtSignal, pyqtSlot
+)
+from PyQt5.QtGui import QPixmap, QIcon, QKeyEvent, QColor, QFont
 from ui.styles import STYLES
 from ui.window_manager import WindowManager
-from datetime import datetime
 
 class LoginWindow(QMainWindow):
     """Окно входа в систему"""
+    
+    # Сигналы для валидации
+    validation_complete = pyqtSignal(bool)
     
     def __init__(self):
         super().__init__()
         
         # Настройки окна
         self.setWindowTitle("Система тестирования | МГТУ им. Н.Э. Баумана")
-        self.setMinimumSize(900, 600)
+        self.setFixedSize(1200, 700)  # Фиксированный размер окна
         self.setStyleSheet(STYLES)
         
         # Загружаем иконки
@@ -56,9 +62,6 @@ class LoginWindow(QMainWindow):
         
     def setup_ui(self):
         """Настройка интерфейса"""
-        # Устанавливаем иконку окна
-        self.setWindowIcon(QIcon(os.path.join("resources", "icons", "bmstu_logo.png")))
-        
         # Создаем основной виджет и компоновщик
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
@@ -67,152 +70,133 @@ class LoginWindow(QMainWindow):
         main_layout.setSpacing(0)
         
         # Создаем левую панель
-        left_panel = QWidget()
+        left_panel = QFrame()
         left_panel.setObjectName("left-panel")
         left_layout = QVBoxLayout(left_panel)
-        left_layout.setContentsMargins(0, 0, 0, 0)
-        left_layout.setSpacing(0)
+        left_layout.setContentsMargins(50, 50, 50, 50)
+        left_layout.setSpacing(20)
         
         # Добавляем логотип
         logo_label = QLabel()
         logo_label.setObjectName("logo")
         logo_pixmap = QPixmap(os.path.join("resources", "icons", "bmstu_logo.png"))
         if not logo_pixmap.isNull():
-            logo_pixmap = logo_pixmap.scaled(120, 120, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+            logo_pixmap = logo_pixmap.scaled(150, 150, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
             logo_label.setPixmap(logo_pixmap)
-        logo_label.setAlignment(Qt.AlignCenter)
+        logo_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         left_layout.addWidget(logo_label)
         
         # Добавляем заголовок
-        title_label = QLabel("Система тестирования\nМГТУ им. Н.Э. Баумана")
+        title_label = QLabel("Система тестирования")
         title_label.setObjectName("title-label")
+        title_label.setFont(QFont("Segoe UI", 32, QFont.Weight.Bold))
+        title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         left_layout.addWidget(title_label)
         
         # Добавляем подзаголовок
-        subtitle_label = QLabel("Лабораторный практикум\nпо Электротехнике")
+        subtitle_label = QLabel("МГТУ им. Н.Э. Баумана")
         subtitle_label.setObjectName("subtitle-label")
+        subtitle_label.setFont(QFont("Segoe UI", 24))
+        subtitle_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         left_layout.addWidget(subtitle_label)
         
-        # Добавляем приветственный текст
-        welcome_label = QLabel("Добро пожаловать в систему тестирования!\nЗдесь вы можете пройти тестирование по лабораторным\nработам и получить оценку своих знаний.")
-        welcome_label.setObjectName("welcome-label")
-        left_layout.addWidget(welcome_label)
+        # Добавляем описание
+        description_label = QLabel("Лабораторный практикум\nпо электротехнике")
+        description_label.setObjectName("welcome-label")
+        description_label.setFont(QFont("Segoe UI", 18))
+        description_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        left_layout.addWidget(description_label)
         
         main_layout.addWidget(left_panel)
         
         # Создаем правую панель
-        right_panel = QWidget()
+        right_panel = QFrame()
         right_panel.setObjectName("right-panel")
         right_layout = QVBoxLayout(right_panel)
-        right_layout.setContentsMargins(40, 40, 40, 40)
-        right_layout.setSpacing(5)
+        right_layout.setContentsMargins(50, 50, 50, 50)
+        right_layout.setSpacing(20)
         
-        # Создаем контейнер для поля фамилии
-        surname_label = QLabel("Фамилия:")
-        surname_label.setObjectName("input-label")
-        right_layout.addWidget(surname_label)
+        # Создаем форму входа
+        form_widget = QFrame()
+        form_widget.setObjectName("form-widget")
+        form_layout = QVBoxLayout(form_widget)
+        form_layout.setSpacing(15)
         
-        surname_container = QHBoxLayout()
-        surname_container.setSpacing(10)
+        # Добавляем поля ввода
+        for field_type, label_text in [
+            ("surname", "Фамилия"),
+            ("name", "Имя"),
+            ("group", "Группа")
+        ]:
+            # Заголовок поля
+            label = QLabel(label_text)
+            label.setObjectName("input-label")
+            form_layout.addWidget(label)
+            
+            # Контейнер для поля ввода и иконки
+            input_container = QHBoxLayout()
+            input_container.setSpacing(0)
+            input_container.setContentsMargins(0, 0, 0, 0)
+            
+            # Иконка
+            icon_label = QLabel()
+            icon_label.setObjectName("icon")
+            icon_name = "user.svg" if field_type in ["surname", "name"] else "group.svg"
+            icon_pixmap = QPixmap(os.path.join("resources", "icons", icon_name))
+            if not icon_pixmap.isNull():
+                icon_pixmap = icon_pixmap.scaled(32, 32, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+                icon_label.setPixmap(icon_pixmap)
+            input_container.addWidget(icon_label)
+            
+            # Поле ввода
+            input_field = QLineEdit()
+            input_field.setObjectName("input-field")
+            if field_type == "group":
+                input_field.setPlaceholderText("Например: ПС4-51")
+                setattr(self, "group_input", input_field)
+                input_field.textChanged.connect(self.validate_group)
+            else:
+                input_field.setPlaceholderText("Введите " + label_text.lower())
+                setattr(self, f"{field_type}_input", input_field)
+                input_field.textChanged.connect(
+                    lambda text, field=input_field, type=field_type: 
+                    self.validate_name(field, type)
+                )
+            input_container.addWidget(input_field)
+            
+            form_layout.addLayout(input_container)
+            
+            # Метка для ошибок
+            error_label = QLabel()
+            error_label.setObjectName("error-label")
+            self.error_labels[field_type] = error_label
+            form_layout.addWidget(error_label)
         
-        # Добавляем иконку пользователя
-        surname_icon = QLabel()
-        surname_icon.setObjectName("icon")
-        surname_icon.setAccessibleName("icon")
-        surname_pixmap = QPixmap(os.path.join("resources", "icons", "user.svg"))
-        if not surname_pixmap.isNull():
-            surname_pixmap = surname_pixmap.scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation)
-            surname_icon.setPixmap(surname_pixmap)
-        surname_container.addWidget(surname_icon)
+        right_layout.addWidget(form_widget)
         
-        # Добавляем поле фамилии
-        self.surname_input = QLineEdit()
-        self.surname_input.setPlaceholderText("Иванов")
-        self.surname_input.setObjectName("input-field")
-        self.surname_input.textChanged.connect(lambda: self.validate_name(self.surname_input, "surname"))
-        surname_container.addWidget(self.surname_input)
-        right_layout.addLayout(surname_container)
+        # Добавляем кнопки
+        buttons_layout = QVBoxLayout()
+        buttons_layout.setSpacing(10)
         
-        self.error_labels["surname"] = QLabel()
-        self.error_labels["surname"].setObjectName("error-label")
-        right_layout.addWidget(self.error_labels["surname"])
+        # Кнопка входа
+        self.login_button = QPushButton("Войти")
+        self.login_button.setObjectName("login-button")
+        self.login_button.clicked.connect(self.handle_login)
+        buttons_layout.addWidget(self.login_button)
         
-        # Создаем контейнер для поля имени
-        name_label = QLabel("Имя:")
-        name_label.setObjectName("input-label")
-        right_layout.addWidget(name_label)
+        # Кнопка входа для преподавателя
+        self.teacher_button = QPushButton("Вход для преподавателя")
+        self.teacher_button.setObjectName("teacher-button")
+        self.teacher_button.clicked.connect(self.handle_teacher_login)
+        buttons_layout.addWidget(self.teacher_button)
         
-        name_container = QHBoxLayout()
-        name_container.setSpacing(10)
-        
-        # Добавляем иконку пользователя
-        name_icon = QLabel()
-        name_icon.setObjectName("icon")
-        name_icon.setAccessibleName("icon")
-        name_pixmap = QPixmap(os.path.join("resources", "icons", "user.svg"))
-        if not name_pixmap.isNull():
-            name_pixmap = name_pixmap.scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation)
-            name_icon.setPixmap(name_pixmap)
-        name_container.addWidget(name_icon)
-        
-        # Добавляем поле имени
-        self.name_input = QLineEdit()
-        self.name_input.setPlaceholderText("Иван")
-        self.name_input.setObjectName("input-field")
-        self.name_input.textChanged.connect(lambda: self.validate_name(self.name_input, "name"))
-        name_container.addWidget(self.name_input)
-        right_layout.addLayout(name_container)
-        
-        self.error_labels["name"] = QLabel()
-        self.error_labels["name"].setObjectName("error-label")
-        right_layout.addWidget(self.error_labels["name"])
-        
-        # Создаем контейнер для поля группы
-        group_label = QLabel("Группа:")
-        group_label.setObjectName("input-label")
-        right_layout.addWidget(group_label)
-        
-        group_container = QHBoxLayout()
-        group_container.setSpacing(10)
-        
-        # Добавляем иконку группы
-        group_icon = QLabel()
-        group_icon.setObjectName("icon")
-        group_icon.setAccessibleName("icon")
-        group_pixmap = QPixmap(os.path.join("resources", "icons", "group.svg"))
-        if not group_pixmap.isNull():
-            group_pixmap = group_pixmap.scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation)
-            group_icon.setPixmap(group_pixmap)
-        group_container.addWidget(group_icon)
-        
-        # Добавляем поле группы
-        self.group_input = QLineEdit()
-        self.group_input.setPlaceholderText("ПС4-51")
-        self.group_input.setObjectName("input-field")
-        self.group_input.textChanged.connect(self.validate_group)
-        group_container.addWidget(self.group_input)
-        right_layout.addLayout(group_container)
-        
-        self.error_labels["group"] = QLabel()
-        self.error_labels["group"].setObjectName("error-label")
-        right_layout.addWidget(self.error_labels["group"])
+        right_layout.addLayout(buttons_layout)
         
         # Добавляем текущий год
         year_label = QLabel(f"Текущий год: {datetime.now().year}")
         year_label.setObjectName("year-label")
-        year_label.setAlignment(Qt.AlignRight)
+        year_label.setAlignment(Qt.AlignmentFlag.AlignRight)
         right_layout.addWidget(year_label)
-        
-        # Добавляем кнопки
-        self.login_button = QPushButton("Войти")
-        self.login_button.setObjectName("login-button")
-        self.login_button.clicked.connect(self.handle_login)
-        right_layout.addWidget(self.login_button)
-        
-        self.teacher_button = QPushButton("Вход для преподавателя")
-        self.teacher_button.setObjectName("teacher-button")
-        self.teacher_button.clicked.connect(self.handle_teacher_login)
-        right_layout.addWidget(self.teacher_button)
         
         main_layout.addWidget(right_panel)
         
@@ -223,7 +207,18 @@ class LoginWindow(QMainWindow):
         shadow.setYOffset(0)
         shadow.setColor(QColor(0, 0, 0, 50))
         self.setGraphicsEffect(shadow)
-        
+
+    @pyqtSlot()
+    def on_text_changed(self, text):
+        """Обработчик изменения текста"""
+        sender = self.sender()
+        if isinstance(sender, QLineEdit):
+            if sender == self.group_input:
+                self.validate_group()
+            else:
+                field_type = "surname" if sender == self.surname_input else "name"
+                self.validate_name(sender, field_type)
+
     def animate_appearance(self):
         """Анимация появления окна"""
         self.animation = QPropertyAnimation(self.opacity_effect, b"opacity")
@@ -290,39 +285,54 @@ class LoginWindow(QMainWindow):
         valid_groups = ['ПС4-41', 'ПС4-51', 'ПС4-42', 'ПС4-52', 'ПС2-41', 'ПС2-51']
         return group in valid_groups
     
-    def validate_name(self, input_field, field_type):
-        """Валидация имени/фамилии"""
-        text = input_field.text()
-        if not text:
-            self.show_error(field_type, "Поле обязательно для заполнения")
-            return False
-        if not re.match(r'^[А-ЯЁа-яё-]+$', text):
-            self.show_error(field_type, "Используйте только русские буквы")
-            return False
-        self.clear_error(field_type)
-        return True
-        
-    def validate_group(self):
-        """Валидация номера группы"""
+    @pyqtSlot()
+    def validate_group(self) -> None:
+        """Проверка группы"""
         text = self.group_input.text()
         if not text:
-            self.show_error("group", "Поле обязательно для заполнения")
-            return False
+            self.error_labels["group"].setText("")
+            self.group_input.setStyleSheet("")
+            self.validation_complete.emit(False)
+            return
             
-        # Паттерн для проверки формата ПС{2,4}-{41,42,51,52}
-        if not re.match(r'^ПС[24]-[45][12]$', text):
-            self.show_error("group", "Формат: ПС4-51 или ПС2-41")
-            return False
+        pattern = r'^[А-ЯЁ]{2}\d{1}-\d{2}[А-ЯЁ]?$'
+        if not re.match(pattern, text):
+            self.error_labels["group"].setText("Неверный формат группы")
+            self.group_input.setStyleSheet("border-color: #dc3545;")
+            self.validation_complete.emit(False)
+            return
             
-        # Проверка допустимых комбинаций
-        valid_groups = ['ПС4-41', 'ПС4-51', 'ПС4-42', 'ПС4-52', 'ПС2-41', 'ПС2-51']
-        if text not in valid_groups:
-            self.show_error("group", "Недопустимый номер группы")
-            return False
+        self.error_labels["group"].setText("")
+        self.group_input.setStyleSheet("border-color: #28a745;")
+        self.validation_complete.emit(True)
+
+    @pyqtSlot(QLineEdit, str)
+    def validate_name(self, field: QLineEdit, field_type: str) -> None:
+        """Проверка имени/фамилии"""
+        text = field.text()
+        if not text:
+            self.error_labels[field_type].setText("")
+            field.setStyleSheet("")
+            self.validation_complete.emit(False)
+            return
             
-        self.clear_error("group")
-        return True
-        
+        if not text.replace(" ", "").isalpha():
+            self.error_labels[field_type].setText("Допустимы только буквы")
+            field.setStyleSheet("border-color: #dc3545;")
+            self.validation_complete.emit(False)
+            return
+            
+        self.error_labels[field_type].setText("")
+        field.setStyleSheet("border-color: #28a745;")
+        self.validation_complete.emit(True)
+
+    def keyPressEvent(self, a0: Optional[QKeyEvent]) -> None:
+        """Обработка нажатия клавиш"""
+        if a0 and a0.key() in [Qt.Key.Key_Return, Qt.Key.Key_Enter]:
+            self.handle_login()
+        else:
+            super().keyPressEvent(a0)
+
     def show_error(self, field_type, message):
         """Показать сообщение об ошибке"""
         self.error_labels[field_type].setText(message)
@@ -339,46 +349,25 @@ class LoginWindow(QMainWindow):
             self.validate_group()
         ])
         
-    def handle_login(self):
+    @pyqtSlot()
+    def handle_login(self) -> None:
         """Обработка входа студента"""
-        if self.validate_all():
-            # Сохраняем группу
-            self.save_last_group(self.group_input.text())
-            
-            # Анимация выхода перед показом сообщения и переходом к следующему окну
-            def show_welcome():
-                QMessageBox.information(
-                    self,
-                    "Успешный вход",
-                    f"Добро пожаловать, {self.name_input.text()} {self.surname_input.text()}!"
-                )
-                # Переход к окну выбора лабораторных работ
-                from ui.lab_selection import LabSelectionWindow
-                lab_selection = LabSelectionWindow(
-                    student_name=self.name_input.text(),
-                    student_surname=self.surname_input.text(),
-                    student_group=self.group_input.text()
-                )
-                WindowManager().show_window(lab_selection)
-            
-            self.animate_exit(show_welcome)
+        if not self.validate_all():
+            return
+
+        student_data = {
+            'name': self.name_input.text().strip(),
+            'surname': self.surname_input.text().strip(),
+            'group': self.group_input.text().strip().upper()
+        }
+        
+        # Переход к окну выбора лабораторных работ
+        from ui.lab_selection import LabSelectionWindow
+        lab_selection = LabSelectionWindow(**student_data)
+        WindowManager().show_window(lab_selection)
     
-    def handle_teacher_login(self):
+    @pyqtSlot()
+    def handle_teacher_login(self) -> None:
         """Обработка входа для преподавателя"""
         from ui.teacher_login_window import TeacherLoginWindow
         WindowManager().show_window(TeacherLoginWindow)
-
-    def keyPressEvent(self, event: QKeyEvent):
-        """Обработка нажатий клавиш"""
-        if event.key() == Qt.Key_Return or event.key() == Qt.Key_Enter:
-            # Определяем, какое поле сейчас в фокусе
-            focused_widget = self.focusWidget()
-            if isinstance(focused_widget, QLineEdit):
-                # Если это последнее поле, выполняем вход
-                if focused_widget == self.group_input:
-                    self.handle_login()
-                # Иначе переходим к следующему полю
-                else:
-                    self.focusNextChild()
-        else:
-            super().keyPressEvent(event)

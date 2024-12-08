@@ -34,36 +34,30 @@ class TestTeacherWindow(QtTestCase):
     def test_search_functionality(self):
         """Тест функциональности поиска"""
         # Добавляем тестовые данные в таблицу
-        self.teacher_window.add_student_to_table("ПИ-231", "Иван Иванов", "2023-12-08")
-        self.teacher_window.add_student_to_table("ПИ-232", "Петр Петров", "2023-12-08")
+        test_data = [
+            ("ПИ-231", "Иван Иванов", "2023-12-08"),
+            ("ПИ-232", "Петр Петров", "2023-12-08")
+        ]
+        for group, name, date in test_data:
+            self.teacher_window.add_student_to_table(group, name, date)
         
         # Тестируем поиск
-        self.teacher_window.search_input.setText("Иван")
-        QTest.keyClick(self.teacher_window.search_input, Qt.Key_Return)
-        
-        # Проверяем результаты поиска
-        visible_rows = 0
-        for row in range(self.teacher_window.student_table.rowCount()):
-            if not self.teacher_window.student_table.isRowHidden(row):
-                visible_rows += 1
-        self.assertEqual(visible_rows, 1)
+        self.enter_text(self.teacher_window.search_input, "Иван")
+        self.assertEqual(self._get_visible_rows(), 1)
 
     def test_filter_functionality(self):
         """Тест функциональности фильтрации по группам"""
         # Добавляем тестовые данные
-        self.teacher_window.add_student_to_table("ПИ-231", "Иван Иванов", "2023-12-08")
-        self.teacher_window.add_student_to_table("ПИ-232", "Петр Петров", "2023-12-08")
+        test_data = [
+            ("ПИ-231", "Иван Иванов", "2023-12-08"),
+            ("ПИ-232", "Петр Петров", "2023-12-08")
+        ]
+        for group, name, date in test_data:
+            self.teacher_window.add_student_to_table(group, name, date)
         
         # Выбираем группу в фильтре
-        index = self.teacher_window.filter_group_combo.findText("ПИ-231")
-        self.teacher_window.filter_group_combo.setCurrentIndex(index)
-        
-        # Проверяем результаты фильтрации
-        visible_rows = 0
-        for row in range(self.teacher_window.student_table.rowCount()):
-            if not self.teacher_window.student_table.isRowHidden(row):
-                visible_rows += 1
-        self.assertEqual(visible_rows, 1)
+        self.select_combo_item(self.teacher_window.filter_group_combo, "ПИ-231")
+        self.assertEqual(self._get_visible_rows(), 1)
 
     def test_export_functionality(self):
         """Тест функциональности экспорта данных"""
@@ -77,6 +71,11 @@ class TestTeacherWindow(QtTestCase):
                 export_button = button
                 break
         self.assertIsNotNone(export_button)
+
+    def _get_visible_rows(self):
+        """Подсчет видимых строк в таблице"""
+        return sum(1 for row in range(self.teacher_window.student_table.rowCount())
+                  if not self.teacher_window.student_table.isRowHidden(row))
 
     def tearDown(self):
         self.teacher_window.close()

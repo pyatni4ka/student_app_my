@@ -1,21 +1,25 @@
 """Модуль для прямого управления базой данных через SQLite3"""
 import sqlite3
 import os
+import logging
 
 class DatabaseManager:
     def __init__(self, db_name='questions.db'):
         self.db_name = db_name
         self.connection = None
         self.cursor = None
-    
+        self.logger = logging.getLogger(__name__)
+
     def connect(self):
         """Установка соединения с базой данных"""
         try:
             self.connection = sqlite3.connect(self.db_name)
             self.cursor = self.connection.cursor()
-            print(f"Успешное подключение к базе данных {self.db_name}")
+            self.connection.execute('PRAGMA journal_mode=WAL')  # Оптимизация для частых запросов
+            self.logger.info(f"Успешное подключение к базе данных {self.db_name}")
         except sqlite3.Error as e:
-            print(f"Ошибка при подключении к базе данных: {e}")
+            self.logger.error(f"Ошибка при подключении к базе данных: {e}")
+            raise
     
     def disconnect(self):
         """Закрытие соединения с базой данных"""

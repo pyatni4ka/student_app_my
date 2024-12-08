@@ -1,7 +1,9 @@
 """Виджет статистики для окна преподавателя"""
+from typing import Optional, List, Tuple, cast
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QLabel, 
-    QGridLayout, QPushButton
+    QGridLayout, QPushButton, QLayout,
+    QLayoutItem
 )
 from PyQt5.QtCore import Qt
 import matplotlib.pyplot as plt
@@ -10,11 +12,11 @@ import numpy as np
 
 class StatsWidget(QWidget):
     """Виджет для отображения статистики"""
-    def __init__(self, parent=None):
+    def __init__(self, parent: Optional[QWidget] = None):
         super().__init__(parent)
         self.setup_ui()
     
-    def setup_ui(self):
+    def setup_ui(self) -> None:
         """Настройка интерфейса"""
         layout = QVBoxLayout(self)
         
@@ -36,9 +38,9 @@ class StatsWidget(QWidget):
             container_layout = QVBoxLayout(container)
             
             title_label = QLabel(title)
-            title_label.setAlignment(Qt.AlignCenter)
+            title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
             value_label = QLabel(value)
-            value_label.setAlignment(Qt.AlignCenter)
+            value_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
             value_label.setObjectName("stats-value")
             
             container_layout.addWidget(title_label)
@@ -60,7 +62,7 @@ class StatsWidget(QWidget):
         
         self.update_plot([])
     
-    def update_stats(self, data):
+    def update_stats(self, data: List[Tuple]) -> None:
         """Обновление статистики"""
         if not data:
             return
@@ -75,14 +77,40 @@ class StatsWidget(QWidget):
         }
         
         # Обновляем значения
+        main_layout = self.layout()
+        if main_layout is None:
+            return
+            
+        grid_layout = cast(QGridLayout, main_layout.itemAt(0).layout())
+        if grid_layout is None:
+            return
+            
         for i, (_, value) in enumerate(stats.items()):
-            container = self.layout().itemAt(0).layout().itemAtPosition(i // 2, i % 2).widget()
-            value_label = container.layout().itemAt(1).widget()
+            item = grid_layout.itemAt(i)
+            if item is None:
+                continue
+                
+            container = item.widget()
+            if container is None:
+                continue
+                
+            container_layout = container.layout()
+            if container_layout is None:
+                continue
+                
+            value_item = container_layout.itemAt(1)
+            if value_item is None:
+                continue
+                
+            value_label = value_item.widget()
+            if value_label is None:
+                continue
+                
             value_label.setText(value)
             
         self.update_plot(data)
     
-    def update_plot(self, data):
+    def update_plot(self, data: List[Tuple]) -> None:
         """Обновление графика результатов"""
         self.ax.clear()
         
@@ -92,22 +120,10 @@ class StatsWidget(QWidget):
                         verticalalignment='center')
         else:
             results = [float(row[5].strip('%')) for row in data]
-            groups = [row[2] for row in data]
-            
-            # Создаем график средних результатов по группам
-            unique_groups = list(set(groups))
-            group_means = [np.mean([r for r, g in zip(results, groups) if g == group]) 
-                         for group in unique_groups]
-            
-            bars = self.ax.bar(unique_groups, group_means)
-            self.ax.set_ylabel('Средний результат (%)')
-            self.ax.set_title('Результаты по группам')
-            
-            # Добавляем значения над столбцами
-            for bar in bars:
-                height = bar.get_height()
-                self.ax.text(bar.get_x() + bar.get_width()/2., height,
-                           f'{height:.1f}%',
-                           ha='center', va='bottom')
+            bins = np.linspace(0, 100, 11)  # 10 bins from 0 to 100
+            self.ax.hist(results, bins=bins, edgecolor='black')
+            self.ax.set_xlabel('Результат (%)')
+            self.ax.set_ylabel('Количество студентов')
+            self.ax.set_title('Распределение результатов')
         
         self.canvas.draw()

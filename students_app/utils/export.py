@@ -2,6 +2,7 @@
 import os
 from datetime import datetime
 import pandas as pd
+from pandas import ExcelWriter
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
@@ -41,34 +42,35 @@ class DataExporter:
         df = pd.DataFrame(self.data, columns=self.headers)
         
         # Создаем writer для Excel
-        with pd.ExcelWriter(filename, engine='xlsxwriter') as writer:
-            df.to_excel(writer, sheet_name='Результаты', index=False)
-            
-            # Получаем рабочий лист
-            worksheet = writer.sheets['Результаты']
-            
-            # Настраиваем ширину колонок
-            for i, col in enumerate(df.columns):
-                max_length = max(
-                    df[col].astype(str).apply(len).max(),
-                    len(col)
-                )
-                worksheet.set_column(i, i, max_length + 2)
-            
-            # Добавляем форматирование
-            workbook = writer.book
-            header_format = workbook.add_format({
-                'bold': True,
-                'align': 'center',
-                'valign': 'vcenter',
-                'fg_color': '#D9D9D9',
-                'border': 1
-            })
-            
-            # Применяем формат к заголовкам
-            for col_num, value in enumerate(df.columns.values):
-                worksheet.write(0, col_num, value, header_format)
+        writer = pd.ExcelWriter(filename, engine='openpyxl')
+        df.to_excel(writer, sheet_name='Результаты', index=False)
         
+        # Получаем рабочий лист
+        worksheet = writer.sheets['Результаты']
+        
+        # Настраиваем ширину колонок
+        for i, col in enumerate(df.columns):
+            max_length = max(
+                df[col].astype(str).apply(len).max(),
+                len(col)
+            )
+            worksheet.set_column(i, i, max_length + 2)
+        
+        # Добавляем форматирование
+        workbook = writer.book
+        header_format = workbook.add_format({
+            'bold': True,
+            'align': 'center',
+            'valign': 'vcenter',
+            'fg_color': '#D9D9D9',
+            'border': 1
+        })
+        
+        # Применяем формат к заголовкам
+        for col_num, value in enumerate(df.columns.values):
+            worksheet.write(0, col_num, value, header_format)
+        
+        writer.close()
         return filename
     
     def export_to_csv(self):

@@ -6,13 +6,13 @@ from datetime import datetime
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from PyQt5.QtWidgets import (
-    QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
+    QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
     QLabel, QLineEdit, QPushButton, QTableWidget,
     QTableWidgetItem, QHeaderView, QMessageBox, QMenu,
-    QComboBox, QToolBar, QAction, QFileDialog, QDialog
+    QComboBox, QToolBar, QAction, QFileDialog, QDialog, QInputDialog
 )
-from PyQt5.QtCore import Qt, QTimer
-from PyQt5.QtGui import QPixmap, QIcon, QTextDocument
+from PyQt5.QtCore import Qt, QTimer, QSize
+from PyQt5.QtGui import QPixmap, QTextDocument, QIcon
 from PyQt5.QtPrintSupport import QPrintDialog, QPrinter
 from utils.export import DataExporter
 from utils.archive_manager import ArchiveManager
@@ -113,8 +113,11 @@ class TeacherWindow(QMainWindow):
                                "resources", "icons", "bmstu_logo.svg")
         logo_pixmap = QPixmap(logo_path)
         if not logo_pixmap.isNull():
-            logo_pixmap = logo_pixmap.scaled(40, 40, Qt.KeepAspectRatio, 
-                                           Qt.SmoothTransformation)
+            logo_pixmap = logo_pixmap.scaled(
+                QSize(200, 200),
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation
+            )
             logo_label.setPixmap(logo_pixmap)
         else:
             logo_label.setText("МГТУ")
@@ -242,12 +245,12 @@ class TeacherWindow(QMainWindow):
         self.results_table.setRowCount(len(test_data))
         for i, row_data in enumerate(test_data):
             for j, value in enumerate(row_data):
-                item = QTableWidgetItem(value)
+                item = QTableWidgetItem(str(value))
                 if j == 4:  # Lab work column
-                    item.setData(Qt.UserRole, int(value.split("№")[1]))
+                    item.setData(Qt.ItemDataRole.UserRole, int(value.split("№")[1]))
                 elif j == 5:  # Result column
-                    item.setData(Qt.UserRole, float(value.strip("%")))
-                item.setFlags(item.flags() & ~Qt.ItemIsEditable)
+                    item.setData(Qt.ItemDataRole.UserRole, float(value.strip("%")))
+                item.setFlags(item.flags() | Qt.ItemFlag.ItemIsEditable)
                 self.results_table.setItem(i, j, item)
     
     def get_selected_data(self):
@@ -299,36 +302,42 @@ class TeacherWindow(QMainWindow):
     def handle_print(self):
         """Обработка печати"""
         try:
-            printer = QPrinter(QPrinter.HighResolution)
-            dialog = QPrintDialog(printer, self)
-            
-            if dialog.exec_() == QDialog.Accepted:
-                data = self.get_selected_data()
-                
-                # Создаем HTML для печати
-                html = "<table border='1' cellspacing='0' cellpadding='4' width='100%'>"
-                
-                # Заголовки
-                html += "<tr>"
-                for col in range(self.results_table.columnCount()):
-                    header = self.results_table.horizontalHeaderItem(col).text()
-                    html += f"<th>{header}</th>"
-                html += "</tr>"
-                
-                # Данные
-                for row_data in data:
+            dialog = QFileDialog(self, "Сохранить как PDF")
+            dialog.setAcceptMode(QFileDialog.AcceptSave)
+            dialog.setNameFilter("PDF файлы (*.pdf)")
+            result = dialog.exec_()
+            filename = None
+            if result == QFileDialog.Accepted:
+                filename = dialog.selectedFiles()[0]
+                if filename:
+                    printer = QPrinter(QPrinter.HighResolution)
+                    printer.setOutputFileName(filename)
+                    data = self.get_selected_data()
+                    
+                    # Создаем HTML для печати
+                    html = "<table border='1' cellspacing='0' cellpadding='4' width='100%'>"
+                    
+                    # Заголовки
                     html += "<tr>"
-                    for cell in row_data:
-                        html += f"<td>{cell}</td>"
+                    for col in range(self.results_table.columnCount()):
+                        header = self.results_table.horizontalHeaderItem(col).text()
+                        html += f"<th>{header}</th>"
                     html += "</tr>"
-                
-                html += "</table>"
-                
-                # Печать
-                document = QTextDocument()
-                document.setHtml(html)
-                document.print_(printer)
-                
+                    
+                    # Данные
+                    for row_data in data:
+                        html += "<tr>"
+                        for cell in row_data:
+                            html += f"<td>{cell}</td>"
+                        html += "</tr>"
+                    
+                    html += "</table>"
+                    
+                    # Печать
+                    document = QTextDocument()
+                    document.setHtml(html)
+                    document.print_(printer)
+                    
         except Exception as e:
             logger.error("Ошибка при печати", exc_info=True)
             QMessageBox.critical(self, "Ошибка", str(e), QMessageBox.Ok)
@@ -389,23 +398,25 @@ class TeacherWindow(QMainWindow):
             data = self.get_selected_data()
             exporter = DataExporter(data)
             
-            if format_name == "PDF":
-                filename = exporter.export_to_pdf()
-            elif format_name == "Excel":
+            if format_name == "Excel":
                 filename = exporter.export_to_excel()
-            elif format_name == "CSV":
-                filename = exporter.export_to_csv()
+            else:  # PDF
+                filename = exporter.export_to_pdf()
             
-            QMessageBox.information(
+            if filename:
+                QMessageBox.information(
+                    self,
+                    "Успех",
+                    f"Данные успешно экспортированы в файл:\n{filename}",
+                    QMessageBox.Ok
+                )
+        except Exception as e:
+            QMessageBox.critical(
                 self,
-                "Успех",
-                f"Данные успешно экспортированы в файл:\n{filename}",
+                "Ошибка",
+                f"Ошибка при экспорте данных: {str(e)}",
                 QMessageBox.Ok
             )
-        except Exception as e:
-            error_msg = f"Ошибка при экспорте данных: {str(e)}"
-            logger.error(error_msg, exc_info=True)
-            QMessageBox.critical(self, "Ошибка", error_msg, QMessageBox.Ok)
     
     def autosave(self):
         """Автосохранение состояния"""

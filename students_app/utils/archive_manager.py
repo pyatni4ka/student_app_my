@@ -1,7 +1,9 @@
 """Модуль для работы с архивом"""
 import json
 import os
-from datetime import datetime
+import gzip
+import pickle
+from datetime import datetime, timedelta
 
 class ArchiveManager:
     """Менеджер архива"""
@@ -38,3 +40,33 @@ class ArchiveManager:
     def get_archived_items(self):
         """Получение архивированных элементов"""
         return self.archived_data
+
+    def archive_with_compression(self, data, compress_level=6):
+        """Архивация с сжатием"""
+        serialized = pickle.dumps(data)
+        compressed = gzip.compress(serialized, compress_level)
+        
+        archive_record = {
+            "data": compressed,
+            "timestamp": datetime.now().isoformat(),
+            "compressed": True
+        }
+        self.archived_data.append(archive_record)
+        self.save_archive()
+
+    def get_recent_archives(self, days=30):
+        """Получение архивов за последний период"""
+        threshold = datetime.now() - timedelta(days=days)
+        return [
+            item for item in self.archived_data
+            if datetime.fromisoformat(item["archive_date"]) > threshold
+        ]
+
+    def cleanup_old_archives(self, days=90):
+        """Очистка старых архивов"""
+        threshold = datetime.now() - timedelta(days=days)
+        self.archived_data = [
+            item for item in self.archived_data
+            if datetime.fromisoformat(item["archive_date"]) > threshold
+        ]
+        self.save_archive()

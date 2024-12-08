@@ -1,4 +1,10 @@
 """Окно входа для преподавателя"""
+from PyQt5.QtWidgets import (
+    QMainWindow, QWidget, QVBoxLayout, QLabel,
+    QPushButton, QLineEdit, QMessageBox, QHBoxLayout
+)
+from PyQt5.QtCore import Qt, QTimer, QSize
+from PyQt5.QtGui import QPixmap, QIcon, QCursor, QColor, QPainter, QPainterPath
 import os
 import sys
 import logging
@@ -6,12 +12,6 @@ from functools import lru_cache
 from pathlib import Path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from PyQt5.QtWidgets import (
-    QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
-    QLabel, QLineEdit, QPushButton, QMessageBox
-)
-from PyQt5.QtCore import Qt, QTimer, QSize
-from PyQt5.QtGui import QPixmap, QColor, QPainter, QPainterPath
 from ui.window_manager import WindowManager
 from ui.teacher_window import TeacherWindow
 
@@ -23,16 +23,20 @@ LOGO_PATH = str(RESOURCES_PATH / "bmstu_logo.svg")
 LOCK_PATH = str(RESOURCES_PATH / "lock.svg")
 
 @lru_cache(maxsize=2)
-def load_pixmap(path: str, size: int) -> QPixmap:
+def load_image(path: str, size: int) -> QPixmap:
     """Загружает и кэширует изображение"""
     pixmap = QPixmap(path)
     if not pixmap.isNull():
-        return pixmap.scaled(size, size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        return pixmap.scaled(
+            QSize(size, size),
+            Qt.AspectRatioMode.KeepAspectRatio,
+            Qt.TransformationMode.SmoothTransformation
+        )
     return QPixmap()
 
 # Предварительно загружаем изображения
-LOGO_PIXMAP = load_pixmap(LOGO_PATH, 50)
-LOCK_PIXMAP = load_pixmap(LOCK_PATH, 20)
+LOGO_PIXMAP = load_image(LOGO_PATH, 50)
+LOCK_PIXMAP = load_image(LOCK_PATH, 20)
 
 class RoundedWidget(QWidget):
     """Виджет с закругленными углами для поля ввода"""
@@ -51,7 +55,7 @@ class ModernButton(QPushButton):
         super().__init__(text, parent)
         self.setFixedHeight(40)
         self.setMinimumWidth(280)
-        self.setCursor(Qt.PointingHandCursor)
+        self.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.setStyleSheet("""
             QPushButton {
                 background-color: #2196F3;
@@ -122,18 +126,22 @@ class TeacherLoginWindow(QMainWindow):
         logo_label = QLabel()
         logo_label.setObjectName("logo-small")
         if not LOGO_PIXMAP.isNull():
-            scaled_logo = LOGO_PIXMAP.scaled(80, 80, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+            scaled_logo = LOGO_PIXMAP.scaled(
+                QSize(150, 150),
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation
+            )
             logo_label.setPixmap(scaled_logo)
         else:
             logo_label.setText("МГТУ")
             logo_label.setStyleSheet("font-weight: bold; font-size: 24px;")
-        logo_label.setAlignment(Qt.AlignCenter)
+        logo_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         main_layout.addWidget(logo_label)
         
         # Добавляем заголовок
         title_label = QLabel("Вход для преподавателя")
         title_label.setObjectName("header-title")
-        title_label.setAlignment(Qt.AlignCenter)
+        title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         main_layout.addWidget(title_label)
         
         main_layout.addSpacing(20)
@@ -154,7 +162,7 @@ class TeacherLoginWindow(QMainWindow):
         lock_icon = QLabel()
         lock_icon.setFixedSize(20, 20)
         if not LOCK_PIXMAP.isNull():
-            scaled_lock = LOCK_PIXMAP.scaled(20, 20, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+            scaled_lock = LOCK_PIXMAP.scaled(20, 20, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
             lock_icon.setPixmap(scaled_lock)
         else:
             lock_icon.setText("🔒")
@@ -178,7 +186,7 @@ class TeacherLoginWindow(QMainWindow):
         button_layout.setContentsMargins(0, 0, 0, 0)
         
         self.login_button = ModernButton("Войти")
-        button_layout.addWidget(self.login_button, alignment=Qt.AlignCenter)
+        button_layout.addWidget(self.login_button, alignment=Qt.AlignmentFlag.AlignCenter)
         self.login_button.clicked.connect(self.handle_login)
         
         main_layout.addWidget(button_container)

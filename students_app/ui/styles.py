@@ -1,35 +1,21 @@
-"""Стили приложения"""
+"""Стили для приложения"""
 
 STYLES = """
-* {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
 QMainWindow {
-    background-color: white;
-}
-
-#header {
-    background-color: #ffffff;
-    border-bottom: 1px solid #e0e0e0;
-    min-height: 30px;
-}
-
-#year-label {
-    color: #333333;
-    font-size: 14px;
-    font-weight: normal;
-    margin: 10px 0;
-    qproperty-alignment: AlignRight;
+    background-color: #f5f5f5;
 }
 
 #left-panel {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-                              stop:0 #2962FF, stop:1 #1565C0);
-    border-top-left-radius: 25px;
-    border-bottom-left-radius: 25px;
-    padding: 40px;
-    min-width: 450px;
+    background-color: #003366;
+    min-width: 500px;
+    padding: 20px;
+    border-right: 1px solid #e0e0e0;
+}
+
+#right-panel {
+    background-color: white;
+    min-width: 500px;
+    padding: 20px;
 }
 
 #logo {
@@ -38,239 +24,121 @@ QMainWindow {
 
 #title-label {
     color: white;
-    font-size: 36px;
+    font-size: 32px;
     font-weight: bold;
-    margin: 30px 0 15px 0;
-    qproperty-alignment: AlignCenter;
-    letter-spacing: 0.5px;
+    margin-bottom: 10px;
 }
 
 #subtitle-label {
-    color: white;
-    font-size: 26px;
-    margin: 15px 0;
-    qproperty-alignment: AlignCenter;
-    opacity: 0.95;
-    letter-spacing: 0.3px;
+    color: #b3d9ff;
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
 #welcome-label {
-    color: white;
-    font-size: 16px;
-    margin: 25px 0;
-    qproperty-alignment: AlignCenter;
-    line-height: 1.8;
-    opacity: 0.9;
-    letter-spacing: 0.2px;
-}
-
-#right-panel {
-    background-color: white;
-    border-top-right-radius: 25px;
-    border-bottom-right-radius: 25px;
-    padding: 60px;
+    color: #e6f2ff;
+    font-size: 18px;
+    line-height: 1.5;
 }
 
 #input-label {
-    font-size: 14px;
-    color: #202124;
+    color: #333333;
+    font-size: 18px;
     font-weight: 500;
-    margin: 10px 0 2px 5px;
+    margin-top: 15px;
+    margin-bottom: 8px;
 }
 
 QLineEdit {
-    border: 2px solid #E3E3E3;
-    border-radius: 12px;
-    padding: 12px 20px;
-    font-size: 16px;
+    padding: 15px 15px 15px 45px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
     background-color: white;
-    margin: 0;
-    color: #202124;
+    font-size: 16px;
+    color: #333333;
+    min-height: 25px;
 }
 
-QLineEdit:hover {
-    border-color: #2962FF;
+QLineEdit::placeholder {
+    color: #6c757d;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 QLineEdit:focus {
-    border-color: #2962FF;
-    background-color: #F5F5F5;
+    border-color: #2196F3;
+    background-color: white;
+}
+
+QLineEdit:hover {
+    border-color: #90CAF9;
+    background-color: white;
 }
 
 QPushButton {
-    background-color: #2962FF;
-    color: white;
+    padding: 15px;
     border: none;
-    border-radius: 12px;
-    padding: 12px 30px;
+    border-radius: 8px;
     font-size: 16px;
     font-weight: bold;
-    margin: 25px 0 15px 0;
-    min-width: 200px;
+    min-width: 150px;
+    margin-top: 20px;
 }
 
-QPushButton:hover {
-    background-color: #1565C0;
+#login-button {
+    background-color: #2196F3;
+    color: white;
 }
 
-QPushButton:pressed {
+#login-button:hover {
+    background-color: #1976D2;
+}
+
+#login-button:pressed {
     background-color: #0D47A1;
 }
 
 #teacher-button {
-    background-color: transparent;
-    color: #2962FF;
-    border: 2px solid #2962FF;
-    border-radius: 12px;
-    padding: 10px 25px;
-    font-size: 15px;
-    margin: 5px 0;
-    min-width: 200px;
+    background-color: #f8f9fa;
+    color: #333333;
+    border: 2px solid #e0e0e0;
 }
 
 #teacher-button:hover {
-    background-color: rgba(41, 98, 255, 0.1);
+    background-color: #e9ecef;
 }
 
 #teacher-button:pressed {
-    background-color: rgba(41, 98, 255, 0.2);
+    background-color: #dee2e6;
 }
 
 #error-label {
-    color: #D32F2F;
+    color: #dc3545;
     font-size: 13px;
-    margin: 0 0 5px 10px;
-    min-height: 18px;
-    letter-spacing: 0.2px;
+    min-height: 20px;
+    padding: 4px 0;
 }
 
-QLabel[accessibleName="icon"] {
-    margin-right: 8px;
-}
-
-.error {
-    border-color: #D32F2F;
-}
-
-/* Стили для окна преподавателя */
-#logo-small {
-    margin: 0 10px;
-}
-
-#header-title {
-    font-size: 20px;
-    font-weight: 500;
-    color: #202124;
-}
-
-#search-label {
+#year-label {
+    color: #6c757d;
     font-size: 14px;
-    color: #202124;
-    font-weight: 500;
+    margin-top: 30px;
 }
 
-#search-input {
-    padding: 8px 12px;
-    border: 1px solid #dadce0;
-    border-radius: 4px;
-    font-size: 14px;
-    background: white;
-}
-
-#search-input:focus {
-    border-color: #1a73e8;
-    outline: none;
-}
-
-#results-table {
-    border: 1px solid #dadce0;
-    border-radius: 4px;
-    background: white;
-}
-
-#results-table QHeaderView::section {
-    background-color: #f8f9fa;
-    padding: 8px;
-    border: none;
-    border-bottom: 1px solid #dadce0;
-    font-weight: 500;
-    color: #202124;
-}
-
-#results-table::item {
-    padding: 8px;
-    border: none;
-}
-
-#results-table::item:selected {
-    background-color: #e8f0fe;
-    color: #202124;
-}
-
-#action-button {
-    background-color: #1a73e8;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 16px;
-    font-size: 14px;
-    font-weight: 500;
-}
-
-#action-button:hover {
-    background-color: #1557b0;
-}
-
-#logout-button {
-    background-color: #f8f9fa;
-    color: #202124;
-    border: 1px solid #dadce0;
-    border-radius: 4px;
-    padding: 8px 16px;
-    font-size: 14px;
-    font-weight: 500;
-}
-
-#logout-button:hover {
-    background-color: #f1f3f4;
-}
-
-#input-container {
-    background-color: #f8f9fa;
-    border: 1px solid #dadce0;
-    border-radius: 4px;
-    min-height: 40px;
-}
-
-#input-container:focus-within {
-    border-color: #1a73e8;
+#form-widget {
     background-color: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#password-input {
-    color: #202124;
+#icon {
+    margin: 0 8px;
+    min-width: 32px;
 }
 
-#password-input::placeholder {
-    color: #5f6368;
-}
-
-#login-button {
-    background-color: #1a73e8;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 12px;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-}
-
-#login-button:hover {
-    background-color: #1557b0;
-}
-
-#login-button:pressed {
-    background-color: #174ea6;
+.input-container {
+    position: relative;
+    margin-bottom: 20px;
 }
 """

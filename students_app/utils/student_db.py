@@ -90,3 +90,35 @@ class StudentDB:
             # Группа не соответствует текущему семестру
             return True, f"ПС{current_group[2]}-{current_semester}1"
         return False, None
+
+    def get_group_statistics(self, group_name):
+        """Получение статистики по группе"""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT COUNT(*) as total_students,
+                       AVG(CASE WHEN last_visit IS NOT NULL THEN 1 ELSE 0 END) as attendance_rate
+                FROM students 
+                WHERE group_name = ?
+            ''', (group_name,))
+            return cursor.fetchone()
+
+    def validate_student_name(self, name):
+        """Валидация имени/фамилии студента"""
+        if not name or len(name) < 2:
+            return False
+        # Только кириллица и дефис
+        return all(c.isalpha() or c == '-' for c in name) and any(c.isalpha() for c in name)
+
+    def get_student_history(self, student_id):
+        """Получение истории посещений студента"""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT visit_date, lab_name, points
+                FROM visits
+                JOIN labs ON visits.lab_id = labs.id
+                WHERE student_id = ?
+                ORDER BY visit_date DESC
+            ''', (student_id,))
+            return cursor.fetchall()
