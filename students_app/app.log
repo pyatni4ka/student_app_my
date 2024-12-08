@@ -1,0 +1,260 @@
+2024-12-08 03:03:21,091 - __main__ - ERROR - Ошибка при запуске приложения: name 'QGraphicsOpacityEffect' is not defined
+2024-12-08 03:04:14,821 - __main__ - ERROR - Ошибка при запуске приложения: name 'QGraphicsOpacityEffect' is not defined
+2024-12-08 03:06:16,771 - __main__ - ERROR - Ошибка при запуске приложения: name 'QGraphicsOpacityEffect' is not defined
+2024-12-08 03:06:26,329 - __main__ - ERROR - Ошибка при запуске приложения: name 'QGraphicsOpacityEffect' is not defined
+2024-12-08 03:07:26,020 - __main__ - ERROR - Ошибка при запуске приложения: name 'QGraphicsDropShadowEffect' is not defined
+2024-12-08 03:07:45,975 - __main__ - ERROR - Ошибка при запуске приложения: name 'QGraphicsDropShadowEffect' is not defined
+2024-12-08 03:07:53,012 - __main__ - ERROR - Ошибка при запуске приложения: name 'QGraphicsDropShadowEffect' is not defined
+2024-12-08 03:26:21,230 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 03:26:21,230 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 03:26:21,354 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 03:26:24,260 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 03:26:24,272 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 03:26:28,953 - ui.window_manager - INFO - Попытка показать окно класса TeacherWindow
+2024-12-08 03:26:28,968 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherWindow
+2024-12-08 11:37:03,151 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 11:37:03,213 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 11:37:07,309 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 11:37:07,318 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 11:37:11,961 - ui.window_manager - INFO - Попытка показать окно класса TeacherWindow
+2024-12-08 11:37:11,973 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherWindow
+2024-12-08 11:48:25,472 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 11:48:25,472 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 11:48:25,492 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 11:48:41,871 - ui.window_manager - INFO - Попытка показать окно класса TeacherWindow
+2024-12-08 11:48:41,886 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherWindow
+2024-12-08 11:54:06,355 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 11:54:06,356 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 11:54:06,374 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 11:54:33,358 - ui.window_manager - INFO - Попытка показать окно класса TeacherWindow
+2024-12-08 11:54:33,370 - ui.window_manager - ERROR - Ошибка при создании окна класса TeacherWindow: 'TeacherWindow' object has no attribute 'stats_widget'
+Traceback (most recent call last):
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/window_manager.py", line 34, in show_window
+    new_window = window_class()
+                 ^^^^^^^^^^^^^^
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/teacher_window.py", line 89, in __init__
+    self.setup_table(content)
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/teacher_window.py", line 196, in setup_table
+    self.update_table()
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/teacher_window.py", line 254, in update_table
+    self.update_stats()
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/teacher_window.py", line 266, in update_stats
+    self.stats_widget.update_stats(data)
+    ^^^^^^^^^^^^^^^^^
+AttributeError: 'TeacherWindow' object has no attribute 'stats_widget'
+2024-12-08 11:54:33,391 - ui.teacher_login_window - ERROR - Ошибка при открытии окна преподавателя: Ошибка при создании окна класса TeacherWindow: 'TeacherWindow' object has no attribute 'stats_widget'
+Traceback (most recent call last):
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/window_manager.py", line 34, in show_window
+    new_window = window_class()
+                 ^^^^^^^^^^^^^^
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/teacher_window.py", line 89, in __init__
+    self.setup_table(content)
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/teacher_window.py", line 196, in setup_table
+    self.update_table()
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/teacher_window.py", line 254, in update_table
+    self.update_stats()
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/teacher_window.py", line 266, in update_stats
+    self.stats_widget.update_stats(data)
+    ^^^^^^^^^^^^^^^^^
+AttributeError: 'TeacherWindow' object has no attribute 'stats_widget'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/teacher_login_window.py", line 122, in handle_login
+    WindowManager().show_window(TeacherWindow)
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/window_manager.py", line 51, in show_window
+    raise Exception(error_msg)
+Exception: Ошибка при создании окна класса TeacherWindow: 'TeacherWindow' object has no attribute 'stats_widget'
+2024-12-08 11:54:43,547 - ui.window_manager - INFO - Попытка показать окно класса TeacherWindow
+2024-12-08 11:54:43,551 - ui.window_manager - ERROR - Ошибка при создании окна класса TeacherWindow: 'TeacherWindow' object has no attribute 'stats_widget'
+Traceback (most recent call last):
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/window_manager.py", line 34, in show_window
+    new_window = window_class()
+                 ^^^^^^^^^^^^^^
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/teacher_window.py", line 89, in __init__
+    self.setup_table(content)
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/teacher_window.py", line 196, in setup_table
+    self.update_table()
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/teacher_window.py", line 254, in update_table
+    self.update_stats()
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/teacher_window.py", line 266, in update_stats
+    self.stats_widget.update_stats(data)
+    ^^^^^^^^^^^^^^^^^
+AttributeError: 'TeacherWindow' object has no attribute 'stats_widget'
+2024-12-08 11:54:43,571 - ui.teacher_login_window - ERROR - Ошибка при открытии окна преподавателя: Ошибка при создании окна класса TeacherWindow: 'TeacherWindow' object has no attribute 'stats_widget'
+Traceback (most recent call last):
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/window_manager.py", line 34, in show_window
+    new_window = window_class()
+                 ^^^^^^^^^^^^^^
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/teacher_window.py", line 89, in __init__
+    self.setup_table(content)
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/teacher_window.py", line 196, in setup_table
+    self.update_table()
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/teacher_window.py", line 254, in update_table
+    self.update_stats()
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/teacher_window.py", line 266, in update_stats
+    self.stats_widget.update_stats(data)
+    ^^^^^^^^^^^^^^^^^
+AttributeError: 'TeacherWindow' object has no attribute 'stats_widget'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/teacher_login_window.py", line 122, in handle_login
+    WindowManager().show_window(TeacherWindow)
+  File "/home/totosha/Документы/GitHub/student_app_my/students_app/ui/window_manager.py", line 51, in show_window
+    raise Exception(error_msg)
+Exception: Ошибка при создании окна класса TeacherWindow: 'TeacherWindow' object has no attribute 'stats_widget'
+2024-12-08 11:55:34,101 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 11:55:34,101 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 11:55:34,118 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 11:55:38,567 - ui.window_manager - INFO - Попытка показать окно класса TeacherWindow
+2024-12-08 11:55:38,765 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherWindow
+2024-12-08 12:09:30,958 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 12:09:30,958 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 12:09:30,976 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 12:09:38,123 - ui.window_manager - INFO - Попытка показать окно класса TeacherWindow
+2024-12-08 12:09:38,143 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherWindow
+2024-12-08 12:14:13,076 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 12:14:13,076 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 12:14:13,094 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 12:14:18,845 - ui.window_manager - INFO - Попытка показать окно класса TeacherWindow
+2024-12-08 12:14:18,863 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherWindow
+2024-12-08 12:17:38,001 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 12:17:38,002 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 12:17:38,021 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 12:20:04,254 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 12:20:04,254 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 12:20:04,277 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 12:23:05,191 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 12:23:05,192 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 12:23:05,195 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 12:24:29,200 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 12:24:29,200 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 12:24:29,214 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 12:26:10,350 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 12:26:10,350 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 12:26:10,364 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 12:26:58,978 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 12:26:58,979 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 12:26:58,993 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 12:27:23,175 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 12:27:23,176 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 12:27:23,193 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 12:32:17,829 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 12:32:17,829 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 12:32:17,844 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 12:34:01,686 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 12:34:01,687 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 12:34:01,703 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 12:35:09,309 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 12:35:09,310 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 12:35:09,528 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 12:35:11,924 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 12:35:11,942 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 12:36:09,459 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 12:36:09,460 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 12:36:09,665 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 12:36:12,405 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 12:36:12,421 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 12:37:06,296 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 12:37:06,297 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 12:37:06,555 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 12:37:09,063 - numexpr.utils - INFO - NumExpr defaulting to 12 threads.
+2024-12-08 12:39:00,867 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 12:39:00,868 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 12:39:01,130 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 12:39:05,111 - numexpr.utils - INFO - NumExpr defaulting to 12 threads.
+2024-12-08 12:39:31,107 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 12:39:31,108 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 12:39:31,359 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 12:39:34,980 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 12:39:34,997 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 12:39:40,842 - ui.window_manager - INFO - Попытка показать окно класса TeacherWindow
+2024-12-08 12:39:40,892 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherWindow
+2024-12-08 12:40:12,982 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 12:40:13,046 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 12:51:11,209 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 12:51:11,210 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 12:51:11,434 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 12:51:14,107 - ui.window_manager - INFO - Попытка показать окно класса TeacherLoginWindow
+2024-12-08 12:51:14,128 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherLoginWindow
+2024-12-08 12:51:20,012 - ui.window_manager - INFO - Попытка показать окно класса TeacherWindow
+2024-12-08 12:51:20,036 - ui.window_manager - INFO - Успешно показано новое окно класса TeacherWindow
+2024-12-08 12:51:53,443 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 12:51:53,506 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 13:16:48,451 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 13:16:48,451 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 13:16:48,704 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 13:17:46,354 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 13:17:46,354 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 13:17:46,577 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 13:21:57,754 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 13:21:57,755 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 13:21:58,092 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 13:22:36,740 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 13:22:36,741 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 13:22:36,951 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 13:24:56,344 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 13:24:56,344 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 13:24:56,609 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 13:50:24,564 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 13:50:24,565 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 13:50:24,988 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 13:52:46,774 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 13:52:46,776 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 13:52:47,078 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 13:56:49,896 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 13:56:49,897 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 13:56:50,322 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 13:57:24,443 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 13:57:24,443 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 13:57:24,676 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 13:59:47,183 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 13:59:47,184 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 13:59:47,497 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 13:59:54,332 - ui.window_manager - INFO - Попытка показать окно класса LabSelectionWindow
+2024-12-08 13:59:54,335 - ui.window_manager - INFO - Успешно показано новое окно класса LabSelectionWindow
+2024-12-08 14:13:56,512 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 14:13:56,513 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 14:13:56,760 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 14:14:07,002 - ui.window_manager - INFO - Попытка показать окно класса LabSelectionWindow
+2024-12-08 14:14:07,008 - ui.window_manager - INFO - Успешно показано новое окно класса LabSelectionWindow
+2024-12-08 14:53:26,186 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 14:53:26,187 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 14:53:26,639 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 14:53:34,452 - ui.window_manager - INFO - Попытка показать окно класса LabSelectionWindow
+2024-12-08 14:53:34,460 - ui.window_manager - INFO - Успешно показано новое окно класса LabSelectionWindow
+2024-12-08 14:56:12,265 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 14:56:12,266 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 14:56:12,637 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 14:56:20,887 - ui.window_manager - INFO - Попытка показать окно класса LabSelectionWindow
+2024-12-08 14:56:20,894 - ui.window_manager - INFO - Успешно показано новое окно класса LabSelectionWindow
+2024-12-08 14:57:42,732 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 14:57:42,733 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 14:57:42,976 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 14:57:50,926 - ui.window_manager - INFO - Попытка показать окно класса LabSelectionWindow
+2024-12-08 14:57:50,932 - ui.window_manager - INFO - Успешно показано новое окно класса LabSelectionWindow
+2024-12-08 14:59:43,002 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 14:59:43,002 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 14:59:43,342 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 15:00:51,088 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 15:00:51,088 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 15:00:51,313 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 15:01:00,389 - ui.window_manager - INFO - Попытка показать окно класса LabSelectionWindow
+2024-12-08 15:01:00,397 - ui.window_manager - INFO - Успешно показано новое окно класса LabSelectionWindow
+2024-12-08 15:04:05,596 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 15:04:05,597 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 15:04:05,916 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 15:04:16,153 - ui.window_manager - INFO - Попытка показать окно класса LabSelectionWindow
+2024-12-08 15:04:16,160 - ui.window_manager - INFO - Успешно показано новое окно класса LabSelectionWindow
+2024-12-08 15:04:18,212 - ui.window_manager - INFO - Попытка показать окно класса TestHistoryWindow
+2024-12-08 15:04:18,213 - ui.window_manager - INFO - Успешно показано новое окно класса TestHistoryWindow
+2024-12-08 15:05:27,594 - ui.window_manager - INFO - Создан новый экземпляр WindowManager
+2024-12-08 15:05:27,595 - ui.window_manager - INFO - Попытка показать окно класса LoginWindow
+2024-12-08 15:05:27,855 - ui.window_manager - INFO - Успешно показано новое окно класса LoginWindow
+2024-12-08 15:05:36,452 - ui.window_manager - INFO - Попытка показать окно класса LabSelectionWindow
+2024-12-08 15:05:36,464 - ui.window_manager - INFO - Успешно показано новое окно класса LabSelectionWindow
+2024-12-08 15:05:38,074 - ui.window_manager - INFO - Попытка показать окно класса TestHistoryWindow
+2024-12-08 15:05:38,075 - ui.window_manager - INFO - Успешно показано новое окно класса TestHistoryWindow
