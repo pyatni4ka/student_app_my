@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>StudentLoginDialog</class>
+ <widget class="QDialog" name="StudentLoginDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Вход в систему тестирования</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog {
+    background-color: white;
+}
+QLabel {
+    color: #2C3E50;
+    margin-bottom: 5px;
+}
+QLineEdit {
+    padding: 8px 15px;
+    border: 2px solid #BDC3C7;
+    border-radius: 8px;
+    font-size: 14pt;
+    background-color: white;
+    margin-right: 15px;
+    min-height: 48px;
+    min-width: 500px;
+}
+QLineEdit:focus {
+    border: 2px solid #3498DB;
+}
+QPushButton#login_button {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 14pt;
+    font-weight: bold;
+    min-width: 500px;
+    min-height: 55px;
+}
+QPushButton#login_button:hover {
+    background-color: #1976D2;
+}
+QPushButton#login_button:pressed {
+    background-color: #0D47A1;
+}
+#surname_icon, #name_icon, #group_icon {
+    padding: 8px;
+    margin-right: 10px;
+    min-width: 48px;
+    min-height: 48px;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>25</number>
+   </property>
+   <property name="leftMargin">
+    <number>40</number>
+   </property>
+   <property name="topMargin">
+    <number>40</number>
+   </property>
+   <property name="rightMargin">
+    <number>40</number>
+   </property>
+   <property name="bottomMargin">
+    <number>40</number>
+   </property>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="surname_container">
+     <property name="spacing">
+      <number>8</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="surname_label">
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>ФАМИЛИЯ</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="surname_input_layout">
+       <item>
+        <widget class="QLabel" name="surname_icon">
+         <property name="minimumSize">
+          <size>
+           <width>48</width>
+           <height>48</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>48</width>
+           <height>48</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap>../resources/icons/user.png</pixmap>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="surname_edit">
+         <property name="placeholderText">
+          <string>Введите фамилию</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="name_container">
+     <property name="spacing">
+      <number>8</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="name_label">
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>ИМЯ</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="name_input_layout">
+       <item>
+        <widget class="QLabel" name="name_icon">
+         <property name="minimumSize">
+          <size>
+           <width>48</width>
+           <height>48</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>48</width>
+           <height>48</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap>../resources/icons/user.png</pixmap>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="name_edit">
+         <property name="placeholderText">
+          <string>Введите имя</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="group_container">
+     <property name="spacing">
+      <number>8</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="group_label">
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>ГРУППА</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="group_input_layout">
+       <item>
+        <widget class="QLabel" name="group_icon">
+         <property name="minimumSize">
+          <size>
+           <width>48</width>
+           <height>48</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>48</width>
+           <height>48</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap>../resources/icons/group.png</pixmap>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="group_edit">
+         <property name="placeholderText">
+          <string>Введите группу</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="button_container">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="login_button">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="text">
+        <string>ВОЙТИ</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="verticalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

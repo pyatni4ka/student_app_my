@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TestWindow</class>
+ <widget class="QMainWindow" name="TestWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Тестирование</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+    background-color: #f5f6fa;
+}
+QFrame#top_panel, QFrame#bottom_panel {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+}
+QLabel#time_label {
+    font-size: 18pt;
+    color: #2c3e50;
+    font-weight: bold;
+}
+QProgressBar#time_progress {
+    border: 2px solid #bdc3c7;
+    border-radius: 5px;
+    text-align: center;
+    height: 25px;
+    font-size: 14pt;
+    font-weight: bold;
+}
+QProgressBar#time_progress::chunk {
+    background-color: #3498db;
+    border-radius: 3px;
+}
+QPushButton {
+    font-size: 14pt;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-weight: bold;
+    min-width: 200px;
+}
+QPushButton:hover {
+    transform: scale(1.05);
+}
+QPushButton:disabled {
+    background-color: #bdc3c7;
+    color: #7f8c8d;
+}
+QPushButton#prev_button {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+}
+QPushButton#prev_button:hover:enabled {
+    background-color: #bdc3c7;
+}
+QPushButton#next_button {
+    background-color: #3498db;
+    color: white;
+}
+QPushButton#next_button:hover:enabled {
+    background-color: #2980b9;
+}
+QPushButton#finish_button {
+    background-color: #2ecc71;
+    color: white;
+}
+QPushButton#finish_button:hover {
+    background-color: #27ae60;
+}
+QProgressBar#progress_indicator {
+    border: none;
+    background-color: #ecf0f1;
+    height: 10px;
+    border-radius: 5px;
+}
+QProgressBar#progress_indicator::chunk {
+    background-color: #2ecc71;
+    border-radius: 5px;
+}
+QRadioButton {
+    background-color: white;
+    color: #2c3e50;
+    padding: 10px;
+    border: 2px solid #ecf0f1;
+    border-radius: 10px;
+    font-size: 14pt;
+    margin: 5px;
+}
+QRadioButton:hover {
+    background-color: #f7f9fc;
+    border-color: #3498db;
+}
+QRadioButton:checked {
+    background-color: #3498db;
+    color: white;
+    border-color: #2980b9;
+}
+QRadioButton::indicator {
+    width: 0px;
+    height: 0px;
+}
+QFrame.question_card {
+    background-color: #f5f6fa;
+    border-radius: 15px;
+    padding: 20px;
+}
+QLabel.question_text {
+    font-size: 16pt;
+    color: #2c3e50;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>30</number>
+    </property>
+    <property name="leftMargin">
+     <number>50</number>
+    </property>
+    <property name="topMargin">
+     <number>50</number>
+    </property>
+    <property name="rightMargin">
+     <number>50</number>
+    </property>
+    <property name="bottomMargin">
+     <number>50</number>
+    </property>
+    <item>
+     <widget class="QFrame" name="top_panel">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="time_label">
+         <property name="text">
+          <string>⏱ 00:00</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QProgressBar" name="time_progress">
+         <property name="value">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QStackedWidget" name="question_stack">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="bottom_panel">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QPushButton" name="prev_button">
+         <property name="text">
+          <string>← Предыдущий</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="next_button">
+         <property name="text">
+          <string>Следующий →</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="finish_button">
+         <property name="text">
+          <string>✓ Завершить</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QProgressBar" name="progress_indicator">
+      <property name="value">
+       <number>0</number>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

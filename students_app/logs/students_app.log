@@ -1,0 +1,679 @@
+2024-12-08 22:45:20 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 22:45:20 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 22:45:20 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 22:45:20 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 22:45:20 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 22:45:20 | ERROR    | __main__:main:141 | Критическая ошибка: [Errno 2] No such file or directory: 'C:\\Users\\MrDes\\OneDrive\\Документы\\GitHub\\student_app_my\\students_app\\ui\\login_window.ui'
+Traceback (most recent call last):
+
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\main.py", line 149, in <module>
+    exit_code = main()
+                └ <function main at 0x000001144DE1C040>
+
+> File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\main.py", line 111, in main
+    login_window = LoginWindow()
+                   └ <class 'ui.login_window.LoginWindow'>
+
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\login_window.py", line 35, in __init__
+    uic.loadUi(os.path.join(os.path.dirname(__file__), 'login_window.ui'), self)
+    │   │      │  │    │    │  │    │       │                              └ <ui.login_window.LoginWindow object at 0x000001144DCDAF80>
+    │   │      │  │    │    │  │    │       └ 'C:\\Users\\MrDes\\OneDrive\\Документы\\GitHub\\student_app_my\\students_app\\ui\\login_window.py'
+    │   │      │  │    │    │  │    └ <function dirname at 0x000001144AE9D940>
+    │   │      │  │    │    │  └ <module 'ntpath' (frozen)>
+    │   │      │  │    │    └ <module 'os' (frozen)>
+    │   │      │  │    └ <function join at 0x000001144AE9D620>
+    │   │      │  └ <module 'ntpath' (frozen)>
+    │   │      └ <module 'os' (frozen)>
+    │   └ <function loadUi at 0x000001144D85A7A0>
+    └ <module 'PyQt5.uic' from 'C:\\Users\\MrDes\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\Loc...
+
+  File "C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\uic\__init__.py", line 241, in loadUi
+    return DynamicUILoader(package).loadUi(uifile, baseinstance, resource_suffix)
+           │               │               │       │             └ '_rc'
+           │               │               │       └ <ui.login_window.LoginWindow object at 0x000001144DCDAF80>
+           │               │               └ 'C:\\Users\\MrDes\\OneDrive\\Документы\\GitHub\\student_app_my\\students_app\\ui\\login_window.ui'
+           │               └ ''
+           └ <class 'PyQt5.uic.Loader.loader.DynamicUILoader'>
+  File "C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\uic\Loader\loader.py", line 66, in loadUi
+    return self.parse(filename, resource_suffix)
+           │    │     │         └ '_rc'
+           │    │     └ 'C:\\Users\\MrDes\\OneDrive\\Документы\\GitHub\\student_app_my\\students_app\\ui\\login_window.ui'
+           │    └ <function UIParser.parse at 0x000001144D94C540>
+           └ <PyQt5.uic.Loader.loader.DynamicUILoader object at 0x000001144DE79150>
+  File "C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\uic\uiparser.py", line 1020, in parse
+    document = parse(filename)
+               │     └ 'C:\\Users\\MrDes\\OneDrive\\Документы\\GitHub\\student_app_my\\students_app\\ui\\login_window.ui'
+               └ <function parse at 0x000001144D93C040>
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\xml\etree\ElementTree.py", line 1219, in parse
+    tree.parse(source, parser)
+    │    │     │       └ None
+    │    │     └ 'C:\\Users\\MrDes\\OneDrive\\Документы\\GitHub\\student_app_my\\students_app\\ui\\login_window.ui'
+    │    └ <function ElementTree.parse at 0x000001144D912E80>
+    └ <xml.etree.ElementTree.ElementTree object at 0x000001144DE79990>
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\xml\etree\ElementTree.py", line 570, in parse
+    source = open(source, "rb")
+                  └ 'C:\\Users\\MrDes\\OneDrive\\Документы\\GitHub\\student_app_my\\students_app\\ui\\login_window.ui'
+
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\MrDes\\OneDrive\\Документы\\GitHub\\student_app_my\\students_app\\ui\\login_window.ui'
+2024-12-08 22:46:11 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 22:46:11 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 22:46:11 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 22:46:11 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 22:46:11 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 22:46:12 | INFO     | ui.login_window:__init__:101 | Окно входа инициализировано
+2024-12-08 22:46:12 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 22:46:12 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 22:46:12 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 22:46:12 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 22:47:32 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 22:47:32 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 22:47:32 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 22:47:32 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 22:47:32 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 22:47:32 | INFO     | ui.login_window:__init__:101 | Окно входа инициализировано
+2024-12-08 22:47:32 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 22:47:32 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 22:47:32 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 22:47:32 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 22:49:39 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 22:49:39 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 22:49:39 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 22:49:39 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 22:49:39 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 22:49:39 | INFO     | ui.login_window:__init__:106 | Окно входа инициализировано
+2024-12-08 22:49:39 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 22:49:39 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 22:49:39 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 22:49:39 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 22:51:03 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 22:51:03 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 22:51:03 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 22:51:03 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 22:51:03 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 22:51:03 | INFO     | ui.login_window:__init__:106 | Окно входа инициализировано
+2024-12-08 22:51:04 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 22:51:04 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 22:51:04 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 22:51:04 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 22:52:34 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 22:52:34 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 22:52:34 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 22:52:34 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 22:52:34 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 22:52:34 | ERROR    | __main__:main:141 | Критическая ошибка: 'NoneType' object has no attribute 'setFocus'
+Traceback (most recent call last):
+
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\main.py", line 149, in <module>
+    exit_code = main()
+                └ <function main at 0x000001FE83D8C400>
+
+> File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\main.py", line 111, in main
+    login_window = LoginWindow()
+                   └ <class 'ui.login_window.LoginWindow'>
+
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\login_window.py", line 87, in __init__
+    self.findChild(QLineEdit, 'lastname_input').setFocus()
+    │    │         └ <class 'PyQt5.QtWidgets.QLineEdit'>
+    │    └ <built-in method findChild>
+    └ <ui.login_window.LoginWindow object at 0x000001FE83BFB370>
+
+AttributeError: 'NoneType' object has no attribute 'setFocus'
+2024-12-08 22:53:44 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 22:53:44 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 22:53:44 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 22:53:44 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 22:53:44 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 22:53:45 | INFO     | ui.login_window:__init__:103 | Окно входа инициализировано
+2024-12-08 22:53:45 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 22:53:45 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 22:53:45 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 22:53:45 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 22:54:53 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 22:54:53 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 22:54:53 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 22:54:53 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 22:54:53 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 22:54:54 | INFO     | ui.login_window:__init__:103 | Окно входа инициализировано
+2024-12-08 22:54:54 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 22:54:54 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 22:54:54 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 22:54:54 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 22:56:17 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 22:56:17 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 22:56:17 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 22:56:17 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 22:56:17 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 22:56:17 | INFO     | ui.login_window:__init__:103 | Окно входа инициализировано
+2024-12-08 22:56:17 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 22:56:17 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 22:56:17 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 22:56:17 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 22:58:46 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 22:58:46 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 22:58:46 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 22:58:46 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 22:58:46 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 22:58:47 | INFO     | ui.login_window:__init__:103 | Окно входа инициализировано
+2024-12-08 22:58:47 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 22:58:47 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 22:58:47 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 22:58:47 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:00:21 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:00:21 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:00:21 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:00:21 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:00:21 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:00:21 | INFO     | ui.login_window:__init__:103 | Окно входа инициализировано
+2024-12-08 23:00:21 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:00:21 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:00:21 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:00:21 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:03:01 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:03:01 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:03:01 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:03:01 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:03:01 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:03:01 | INFO     | ui.login_window:__init__:103 | Окно входа инициализировано
+2024-12-08 23:03:01 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:03:01 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:03:01 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:03:01 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:04:21 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:04:21 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:04:21 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:04:21 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:04:21 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:04:22 | INFO     | ui.login_window:__init__:103 | Окно входа инициализировано
+2024-12-08 23:04:22 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:04:22 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:04:22 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:04:22 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:05:47 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:05:47 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:05:47 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:05:47 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:05:47 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:05:47 | INFO     | ui.login_window:__init__:103 | Окно входа инициализировано
+2024-12-08 23:05:47 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:05:47 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:05:47 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:05:47 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:06:44 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:06:44 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:06:44 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:06:44 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:06:44 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:06:44 | INFO     | ui.login_window:__init__:103 | Окно входа инициализировано
+2024-12-08 23:06:44 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:06:44 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:06:44 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:06:44 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:08:22 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:08:22 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:08:22 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:08:22 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:08:22 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:08:22 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-08 23:08:23 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:08:23 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:08:23 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:08:23 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:12:22 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:12:22 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:12:22 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:12:22 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:12:22 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:12:22 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-08 23:12:22 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:12:22 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:12:22 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:12:22 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:14:31 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:14:31 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:14:31 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:14:31 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:14:31 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:14:31 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-08 23:14:31 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:14:31 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:14:31 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:14:31 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:16:23 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:16:23 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:16:23 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:16:23 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:16:23 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:16:23 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-08 23:16:23 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:16:23 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:16:23 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:16:23 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:21:07 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:21:07 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:21:07 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:21:07 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:21:07 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:21:07 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-08 23:21:08 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:21:08 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:21:08 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:21:08 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:24:35 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:24:35 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:24:35 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:24:35 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:24:35 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:24:35 | INFO     | ui.login_window:__init__:113 | Окно входа инициализировано
+2024-12-08 23:24:35 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:24:35 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:24:35 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:24:35 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:28:40 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:28:40 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:28:40 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:28:40 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:28:40 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:28:41 | INFO     | ui.login_window:__init__:113 | Окно входа инициализировано
+2024-12-08 23:28:41 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:28:41 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:28:41 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:28:41 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:28:50 | ERROR    | __main__:qt_message_handler:90 | Traceback (most recent call last):
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\login_window.py", line 220, in validate_and_login
+    self.lab_window = LabSelectionWindow(user, self.db_manager)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\lab_selection.py", line 49, in __init__
+    uic.loadUi(UI_PATH, self)
+  File "C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\uic\__init__.py", line 241, in loadUi
+    return DynamicUILoader(package).loadUi(uifile, baseinstance, resource_suffix)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\uic\Loader\loader.py", line 66, in loadUi
+    return self.parse(filename, resource_suffix)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\uic\uiparser.py", line 1020, in parse
+    document = parse(filename)
+               ^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\xml\etree\ElementTree.py", line 1219, in parse
+    tree.parse(source, parser)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\xml\etree\ElementTree.py", line 570, in parse
+    source = open(source, "rb")
+             ^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\MrDes\\OneDrive\\Документы\\GitHub\\student_app_my\\students_app\\ui\\lab_selection.ui'
+2024-12-08 23:31:53 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:31:53 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:31:53 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:31:53 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:31:53 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:31:53 | INFO     | ui.login_window:__init__:113 | Окно входа инициализировано
+2024-12-08 23:31:53 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:31:53 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:31:53 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:31:53 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:33:05 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:33:05 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:33:05 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:33:05 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:33:05 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:33:05 | INFO     | ui.login_window:__init__:113 | Окно входа инициализировано
+2024-12-08 23:33:05 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:33:05 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:33:05 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:33:05 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:33:11 | ERROR    | __main__:qt_message_handler:90 | Traceback (most recent call last):
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\login_window.py", line 220, in validate_and_login
+    self.lab_window = LabSelectionWindow(user, self.db_manager)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\lab_selection.py", line 64, in __init__
+    self.populate_labs()
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\lab_selection.py", line 75, in populate_labs
+    self.lab_list_widget.addItem(item)
+    ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'LabSelectionWindow' object has no attribute 'lab_list_widget'
+2024-12-08 23:33:40 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:33:40 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:33:40 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:33:40 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:33:40 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:33:40 | INFO     | ui.login_window:__init__:113 | Окно входа инициализировано
+2024-12-08 23:33:40 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:33:40 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:33:40 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:33:40 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:33:48 | ERROR    | __main__:qt_message_handler:90 | Traceback (most recent call last):
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\login_window.py", line 220, in validate_and_login
+    self.lab_window = LabSelectionWindow(user, self.db_manager)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\lab_selection.py", line 64, in __init__
+    self.populate_labs()
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\lab_selection.py", line 75, in populate_labs
+    self.lab_list_widget.addItem(item)
+    ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'LabSelectionWindow' object has no attribute 'lab_list_widget'
+2024-12-08 23:35:49 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:35:49 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:35:49 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:35:49 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:35:49 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:35:49 | INFO     | ui.login_window:__init__:113 | Окно входа инициализировано
+2024-12-08 23:35:49 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:35:49 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:35:49 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:35:49 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:37:07 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:37:07 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:37:07 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:37:07 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:37:07 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:37:07 | INFO     | ui.login_window:__init__:113 | Окно входа инициализировано
+2024-12-08 23:37:07 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:37:07 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:37:07 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:37:07 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:38:20 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:38:20 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:38:20 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:38:20 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:38:20 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:38:20 | INFO     | ui.login_window:__init__:113 | Окно входа инициализировано
+2024-12-08 23:38:20 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:38:20 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:38:20 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:38:20 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:41:36 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:41:36 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:41:36 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:41:36 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:41:36 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:41:36 | INFO     | ui.login_window:__init__:113 | Окно входа инициализировано
+2024-12-08 23:41:37 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:41:37 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:41:37 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:41:37 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:43:14 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:43:14 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:43:14 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:43:14 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:43:14 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:43:14 | INFO     | ui.login_window:__init__:102 | Окно входа инициализировано
+2024-12-08 23:43:14 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:43:14 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:43:14 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:43:14 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:45:49 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:45:49 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:45:49 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:45:49 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:45:49 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:45:50 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-08 23:45:50 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:45:50 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:45:50 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:45:50 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:47:31 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:47:31 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:47:31 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:47:31 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:47:31 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:47:31 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-08 23:47:32 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:47:32 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:47:32 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:47:32 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:52:28 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:52:28 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:52:28 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:52:28 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:52:28 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:52:28 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-08 23:52:28 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:52:28 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:52:28 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:52:28 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:52:37 | INFO     | ui.lab_selection:__init__:50 | Окно выбора лабораторных работ инициализировано
+2024-12-08 23:53:59 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:53:59 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:53:59 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:53:59 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:53:59 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:53:59 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-08 23:53:59 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:53:59 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:53:59 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:53:59 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:54:07 | INFO     | ui.lab_selection:__init__:52 | Окно выбора лабораторных работ инициализировано
+2024-12-08 23:56:06 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:56:06 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:56:06 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:56:06 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:56:06 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:56:06 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-08 23:56:06 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:56:06 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:56:06 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:56:06 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:56:12 | INFO     | ui.lab_selection:__init__:52 | Окно выбора лабораторных работ инициализировано
+2024-12-08 23:56:14 | ERROR    | __main__:qt_message_handler:90 | Traceback (most recent call last):
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\lab_selection.py", line 122, in logout
+    login_dialog = StudentLoginDialog()
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\student_login.py", line 23, in __init__
+    uic.loadUi(UI_PATH, self)
+  File "C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\uic\__init__.py", line 241, in loadUi
+    return DynamicUILoader(package).loadUi(uifile, baseinstance, resource_suffix)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\uic\Loader\loader.py", line 66, in loadUi
+    return self.parse(filename, resource_suffix)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\uic\uiparser.py", line 1020, in parse
+    document = parse(filename)
+               ^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\xml\etree\ElementTree.py", line 1219, in parse
+    tree.parse(source, parser)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\xml\etree\ElementTree.py", line 570, in parse
+    source = open(source, "rb")
+             ^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\MrDes\\OneDrive\\Документы\\GitHub\\student_app_my\\students_app\\ui\\student_login.ui'
+2024-12-08 23:56:55 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:56:55 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:56:55 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:56:55 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:56:55 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:56:55 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-08 23:56:55 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:56:55 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:56:55 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:56:55 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:57:01 | INFO     | ui.lab_selection:__init__:52 | Окно выбора лабораторных работ инициализировано
+2024-12-08 23:57:03 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:57:03 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-08 23:57:03 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:57:10 | INFO     | ui.lab_selection:__init__:52 | Окно выбора лабораторных работ инициализировано
+2024-12-08 23:58:34 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-08 23:58:34 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-08 23:58:34 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-08 23:58:34 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-08 23:58:34 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-08 23:58:34 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-08 23:58:34 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-08 23:58:34 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-08 23:58:34 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-08 23:58:34 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-08 23:58:42 | ERROR    | __main__:qt_message_handler:90 | Traceback (most recent call last):
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\login_window.py", line 215, in validate_and_login
+    self.lab_window = LabSelectionWindow(user, self.db_manager)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\lab_selection.py", line 20, in __init__
+    self.group = group.split("'")[3] if "'" in group else group
+                                        ^^^^^^^^^^^^
+TypeError: argument of type 'DatabaseManager' is not iterable
+2024-12-09 00:00:12 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-09 00:00:12 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-09 00:00:12 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-09 00:00:12 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-09 00:00:12 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-09 00:00:12 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-09 00:00:12 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-09 00:00:12 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-09 00:00:12 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-09 00:00:12 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-09 00:00:19 | INFO     | ui.lab_selection:__init__:52 | Окно выбора лабораторных работ инициализировано
+2024-12-09 00:03:38 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-09 00:03:38 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-09 00:03:38 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-09 00:03:38 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-09 00:03:38 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-09 00:03:38 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-09 00:03:38 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-09 00:03:38 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-09 00:03:38 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-09 00:03:38 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-09 00:03:44 | INFO     | ui.lab_selection:__init__:53 | Окно выбора лабораторных работ инициализировано
+2024-12-09 00:03:45 | INFO     | ui.lab_test_window:__init__:56 | Окно тестирования для ЛР1 инициализировано
+2024-12-09 00:09:28 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-09 00:09:28 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-09 00:09:28 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-09 00:09:28 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-09 00:09:28 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-09 00:09:28 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-09 00:09:28 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-09 00:09:28 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-09 00:09:28 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-09 00:09:28 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-09 00:09:37 | INFO     | ui.lab_selection:__init__:53 | Окно выбора лабораторных работ инициализировано
+2024-12-09 00:09:40 | INFO     | ui.lab_test_window:__init__:59 | Окно тестирования для ЛР1 инициализировано
+2024-12-09 00:10:06 | INFO     | ui.lab_test_window:__init__:59 | Окно тестирования для ЛР1 инициализировано
+2024-12-09 00:17:04 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-09 00:17:04 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-09 00:17:04 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-09 00:17:04 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-09 00:17:04 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-09 00:17:05 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-09 00:17:05 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-09 00:17:05 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-09 00:17:05 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-09 00:17:05 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-09 00:17:12 | ERROR    | __main__:qt_message_handler:90 | Traceback (most recent call last):
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\login_window.py", line 215, in validate_and_login
+    self.lab_window = LabSelectionWindow(user, self.db_manager)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\lab_selection.py", line 89, in __init__
+    self.create_button_panel()
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\lab_selection.py", line 163, in create_button_panel
+    if 'role' in self.db_manager.user_data and self.db_manager.user_data['role'] == 'teacher':
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DatabaseManager' object has no attribute 'user_data'
+2024-12-09 00:19:04 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-09 00:19:04 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-09 00:19:04 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-09 00:19:04 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-09 00:19:04 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-09 00:19:04 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-09 00:19:04 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-09 00:19:04 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-09 00:19:04 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-09 00:19:04 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-09 00:19:10 | INFO     | ui.lab_selection:__init__:99 | Окно выбора лабораторных работ инициализировано
+2024-12-09 00:19:11 | INFO     | ui.lab_test_window:__init__:60 | Окно тестирования для ЛР1 инициализировано
+2024-12-09 00:19:27 | ERROR    | __main__:qt_message_handler:90 | Traceback (most recent call last):
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\lab_test_window.py", line 385, in finish_test
+    for i in range(len(self.questions)):
+                       ^^^^^^^^^^^^^^
+AttributeError: 'LabTestWindow' object has no attribute 'questions'
+2024-12-09 00:20:40 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-09 00:20:40 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-09 00:20:40 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-09 00:20:40 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-09 00:20:40 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-09 00:20:40 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-09 00:20:40 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-09 00:20:40 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-09 00:20:40 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-09 00:20:40 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-09 00:20:47 | INFO     | ui.lab_selection:__init__:99 | Окно выбора лабораторных работ инициализировано
+2024-12-09 00:20:48 | ERROR    | __main__:qt_message_handler:90 | Traceback (most recent call last):
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\lab_selection.py", line 301, in start_test
+    self.test_window = LabTestWindow(
+                       ^^^^^^^^^^^^^^
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\lab_test_window.py", line 22, in __init__
+    self.db = DatabaseManager()
+              ^^^^^^^^^^^^^^^
+NameError: name 'DatabaseManager' is not defined
+2024-12-09 00:21:40 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-09 00:21:40 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-09 00:21:40 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-09 00:21:40 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-09 00:21:40 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-09 00:21:40 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-09 00:21:40 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-09 00:21:40 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-09 00:21:40 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-09 00:21:40 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-09 00:21:46 | INFO     | ui.lab_selection:__init__:99 | Окно выбора лабораторных работ инициализировано
+2024-12-09 00:21:47 | INFO     | ui.lab_test_window:__init__:71 | Окно тестирования для ЛР1 инициализировано
+2024-12-09 00:22:30 | ERROR    | __main__:qt_message_handler:90 | Traceback (most recent call last):
+  File "C:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\ui\test_results_window.py", line 95, in return_to_main
+    self.lab_window = LabSelectionWindow(self.user_data)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: LabSelectionWindow.__init__() missing 1 required positional argument: 'db_manager'
+2024-12-09 00:23:41 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-09 00:23:41 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-09 00:23:41 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-09 00:23:41 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-09 00:23:41 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-09 00:23:41 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-09 00:23:41 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-09 00:23:41 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-09 00:23:41 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-09 00:23:41 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-09 00:23:59 | INFO     | ui.lab_selection:__init__:99 | Окно выбора лабораторных работ инициализировано
+2024-12-09 00:24:01 | INFO     | ui.lab_test_window:__init__:71 | Окно тестирования для ЛР1 инициализировано
+2024-12-09 00:24:15 | INFO     | ui.lab_selection:__init__:99 | Окно выбора лабораторных работ инициализировано
+2024-12-09 00:24:18 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-09 00:24:18 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-09 00:24:18 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-09 00:24:27 | INFO     | ui.lab_selection:__init__:99 | Окно выбора лабораторных работ инициализировано
+2024-12-09 00:26:00 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-09 00:26:00 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-09 00:26:00 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-09 00:26:00 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-09 00:26:00 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-09 00:26:01 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-09 00:26:01 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-09 00:26:01 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-09 00:26:01 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-09 00:26:01 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-09 00:26:06 | INFO     | ui.lab_selection:__init__:99 | Окно выбора лабораторных работ инициализировано
+2024-12-09 00:26:06 | ERROR    | ui.lab_selection:refresh_labs:453 | Ошибка при обновлении списка лабораторных работ: 'DatabaseManager' object has no attribute 'get_labs_with_results'
+2024-12-09 00:26:10 | INFO     | ui.lab_test_window:__init__:71 | Окно тестирования для ЛР1 инициализировано
+2024-12-09 00:26:22 | INFO     | ui.lab_selection:__init__:99 | Окно выбора лабораторных работ инициализировано
+2024-12-09 00:26:22 | ERROR    | ui.lab_selection:refresh_labs:453 | Ошибка при обновлении списка лабораторных работ: 'DatabaseManager' object has no attribute 'get_labs_with_results'
+2024-12-09 00:26:26 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-09 00:26:26 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-09 00:26:26 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-09 00:27:28 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-09 00:27:28 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-09 00:27:28 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-09 00:27:28 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-09 00:27:28 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-09 00:27:29 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-09 00:27:29 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-09 00:27:29 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-09 00:27:29 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-09 00:27:29 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-09 00:27:39 | INFO     | ui.lab_selection:__init__:99 | Окно выбора лабораторных работ инициализировано
+2024-12-09 00:27:43 | INFO     | ui.lab_test_window:__init__:71 | Окно тестирования для ЛР1 инициализировано
+2024-12-09 00:27:52 | INFO     | ui.lab_selection:__init__:99 | Окно выбора лабораторных работ инициализировано
+2024-12-09 00:29:59 | INFO     | utils.logger:setup_logger:76 | Logger initialized. Debug mode: False
+2024-12-09 00:29:59 | INFO     | __main__:main:102 | Qt version: 5.15.2
+2024-12-09 00:29:59 | INFO     | __main__:main:103 | PyQt version: 5.15.9
+2024-12-09 00:29:59 | INFO     | __main__:main:104 | Python version: 3.11.9
+2024-12-09 00:29:59 | INFO     | ui.window_manager:__new__:14 | Создан новый экземпляр WindowManager
+2024-12-09 00:29:59 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-09 00:29:59 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-09 00:29:59 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow
+2024-12-09 00:29:59 | INFO     | __main__:main:117 | Окно входа создано и отображено
+2024-12-09 00:29:59 | INFO     | __main__:main:137 | Запускаем главный цикл приложения
+2024-12-09 00:30:06 | INFO     | ui.lab_selection:__init__:99 | Окно выбора лабораторных работ инициализировано
+2024-12-09 00:30:16 | INFO     | ui.window_manager:show_window:26 | Попытка показать окно класса LoginWindow
+2024-12-09 00:30:16 | INFO     | ui.login_window:__init__:108 | Окно входа инициализировано
+2024-12-09 00:30:16 | INFO     | ui.window_manager:show_window:64 | Успешно показано окно класса LoginWindow

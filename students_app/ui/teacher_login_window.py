@@ -1,233 +1,87 @@
 """Окно входа для преподавателя"""
-from PyQt5.QtWidgets import (
-    QMainWindow, QWidget, QVBoxLayout, QLabel,
-    QPushButton, QLineEdit, QMessageBox, QHBoxLayout
-)
-from PyQt5.QtCore import Qt, QTimer, QSize
-from PyQt5.QtGui import QPixmap, QIcon, QCursor, QColor, QPainter, QPainterPath
+from PyQt5.QtWidgets import QMainWindow, QMessageBox
+from PyQt5.QtCore import Qt, QTimer
+from PyQt5 import uic
 import os
-import sys
-import logging
-from functools import lru_cache
 from pathlib import Path
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from loguru import logger
 
 from ui.window_manager import WindowManager
 from ui.teacher_window import TeacherWindow
 
-logger = logging.getLogger(__name__)
-
-# Предварительно загружаем и кэшируем изображения при импорте модуля
+# Пути к ресурсам и UI файлу
 RESOURCES_PATH = Path(os.path.dirname(os.path.dirname(__file__))) / "resources" / "icons"
-LOGO_PATH = str(RESOURCES_PATH / "bmstu_logo.svg")
-LOCK_PATH = str(RESOURCES_PATH / "lock.svg")
-
-@lru_cache(maxsize=2)
-def load_image(path: str, size: int) -> QPixmap:
-    """Загружает и кэширует изображение"""
-    pixmap = QPixmap(path)
-    if not pixmap.isNull():
-        return pixmap.scaled(
-            QSize(size, size),
-            Qt.AspectRatioMode.KeepAspectRatio,
-            Qt.TransformationMode.SmoothTransformation
-        )
-    return QPixmap()
-
-# Предварительно загружаем изображения
-LOGO_PIXMAP = load_image(LOGO_PATH, 50)
-LOCK_PIXMAP = load_image(LOCK_PATH, 20)
-
-class RoundedWidget(QWidget):
-    """Виджет с закругленными углами для поля ввода"""
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setStyleSheet("""
-            RoundedWidget {
-                background-color: #f8f9fa;
-                border-radius: 6px;
-            }
-        """)
-
-class ModernButton(QPushButton):
-    """Современная кнопка в стиле Material Design"""
-    def __init__(self, text, parent=None):
-        super().__init__(text, parent)
-        self.setFixedHeight(40)
-        self.setMinimumWidth(280)
-        self.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.setStyleSheet("""
-            QPushButton {
-                background-color: #2196F3;
-                color: white;
-                border: none;
-                border-radius: 6px;
-                padding: 0 24px;
-                font-size: 15px;
-                font-weight: 500;
-            }
-            QPushButton:hover {
-                background-color: #1E88E5;
-            }
-            QPushButton:pressed {
-                background-color: #1976D2;
-            }
-        """)
+UI_PATH = Path(os.path.dirname(__file__)) / "teacher_login_window.ui"
 
 class TeacherLoginWindow(QMainWindow):
     """Класс окна входа для преподавателя"""
-    
-    # Определяем стили как константу класса
-    WINDOW_STYLE = """
-        QMainWindow {
-            background-color: white;
-        }
-        #password-input {
-            border: none;
-            background: transparent;
-            font-size: 15px;
-            padding: 8px 0;
-            color: #333;
-        }
-        #password-input::placeholder {
-            color: #999;
-        }
-        #header-title {
-            color: #2196F3;
-            font-size: 24px;
-            font-weight: 500;
-            margin: 16px 0;
-        }
-        #input-label {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 6px;
-        }
-        QLabel {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-        }
-    """
-    
+
     def __init__(self):
         super().__init__()
-        # Устанавливаем базовые параметры окна
-        self.setWindowTitle("Вход для преподавателя")
-        self.setFixedSize(480, 400)
-        self.setStyleSheet(self.WINDOW_STYLE)
-        
-        # Создаем основной виджет и компоновщик
-        central_widget = QWidget()
-        self.setCentralWidget(central_widget)
-        main_layout = QVBoxLayout(central_widget)
-        main_layout.setContentsMargins(50, 30, 50, 50)
-        main_layout.setSpacing(20)
-        
-        # Добавляем логотип
-        logo_label = QLabel()
-        logo_label.setObjectName("logo-small")
-        if not LOGO_PIXMAP.isNull():
-            scaled_logo = LOGO_PIXMAP.scaled(
-                QSize(150, 150),
-                Qt.AspectRatioMode.KeepAspectRatio,
-                Qt.TransformationMode.SmoothTransformation
-            )
-            logo_label.setPixmap(scaled_logo)
-        else:
-            logo_label.setText("МГТУ")
-            logo_label.setStyleSheet("font-weight: bold; font-size: 24px;")
-        logo_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        main_layout.addWidget(logo_label)
-        
-        # Добавляем заголовок
-        title_label = QLabel("Вход для преподавателя")
-        title_label.setObjectName("header-title")
-        title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        main_layout.addWidget(title_label)
-        
-        main_layout.addSpacing(20)
-        
-        # Добавляем поле для пароля
-        password_label = QLabel("Пароль")
-        password_label.setObjectName("input-label")
-        main_layout.addWidget(password_label)
-        
-        # Контейнер для поля пароля с иконкой
-        password_container = RoundedWidget()
-        password_container.setFixedHeight(44)
-        password_layout = QHBoxLayout(password_container)
-        password_layout.setContentsMargins(12, 0, 12, 0)
-        password_layout.setSpacing(8)
-        
-        # Добавляем иконку замка
-        lock_icon = QLabel()
-        lock_icon.setFixedSize(20, 20)
-        if not LOCK_PIXMAP.isNull():
-            scaled_lock = LOCK_PIXMAP.scaled(20, 20, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
-            lock_icon.setPixmap(scaled_lock)
-        else:
-            lock_icon.setText("🔒")
-            lock_icon.setStyleSheet("font-size: 16px;")
-        password_layout.addWidget(lock_icon)
-        
-        # Поле ввода пароля
-        self.password_input = QLineEdit()
-        self.password_input.setPlaceholderText("Введите пароль")
-        self.password_input.setEchoMode(QLineEdit.Password)
-        self.password_input.setObjectName("password-input")
-        self.password_input.returnPressed.connect(self.handle_login)
-        password_layout.addWidget(self.password_input)
-        
-        main_layout.addWidget(password_container)
-        main_layout.addSpacing(30)
-        
-        # Добавляем кнопку входа с центрированием
-        button_container = QWidget()
-        button_layout = QHBoxLayout(button_container)
-        button_layout.setContentsMargins(0, 0, 0, 0)
-        
-        self.login_button = ModernButton("Войти")
-        button_layout.addWidget(self.login_button, alignment=Qt.AlignmentFlag.AlignCenter)
-        self.login_button.clicked.connect(self.handle_login)
-        
-        main_layout.addWidget(button_container)
-        main_layout.addStretch()
-        
-        # Устанавливаем фокус на поле ввода пароля
-        self.password_input.setFocus()
-    
-    def handle_login(self):
-        """Обработка входа преподавателя"""
-        password = self.password_input.text()
-        
+
+        # Загружаем UI
+        uic.loadUi(UI_PATH, self)
+
+        # Настраиваем окно
+        self.setFixedSize(400, 500)
+        self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
+
+        # Подключаем обработчики событий
+        self.login_button.clicked.connect(self.check_password)
+        self.password_input.returnPressed.connect(self.check_password)
+
+        # Скрываем сообщение об ошибке
+        self.error_label.hide()
+
+        # Инициализируем WindowManager
+        self.window_manager = WindowManager()
+
+        # Таймер для скрытия сообщения об ошибке
+        self.error_timer = QTimer()
+        self.error_timer.timeout.connect(lambda: self.error_label.hide())
+        self.error_timer.setSingleShot(True)
+
+    def check_password(self):
+        """Проверяет введенный пароль"""
+        password = self.password_input.text().strip()
+
         if not password:
-            QMessageBox.warning(
-                self,
-                "Ошибка",
-                "Пожалуйста, введите пароль.",
-                QMessageBox.Ok
-            )
+            self.show_error("Введите пароль")
             return
-            
-        if password == "admin":
-            try:
-                # Очищаем поле пароля перед открытием нового окна
-                self.password_input.clear()
-                WindowManager().show_window(TeacherWindow)
-            except Exception as e:
-                error_msg = f"Ошибка при открытии окна преподавателя: {str(e)}"
-                logger.error(error_msg, exc_info=True)
-                QMessageBox.critical(
-                    self,
-                    "Ошибка",
-                    error_msg,
-                    QMessageBox.Ok
-                )
+
+        if password == "admin":  # TODO: заменить на безопасную проверку пароля
+            self.open_teacher_window()
         else:
-            QMessageBox.warning(
+            self.show_error("Неверный пароль")
+            self.password_input.clear()
+
+    def show_error(self, message: str):
+        """Показывает сообщение об ошибке"""
+        self.error_label.setText(message)
+        self.error_label.show()
+        self.error_timer.start(3000)  # Скрыть через 3 секунды
+
+    def open_teacher_window(self):
+        """Открывает окно преподавателя"""
+        try:
+            teacher_window = TeacherWindow()
+            self.window_manager.switch_to_window(teacher_window)
+        except Exception as e:
+            logger.error(f"Ошибка при открытии окна преподавателя: {e}")
+            QMessageBox.critical(
                 self,
                 "Ошибка",
-                "Неверный пароль. Пожалуйста, попробуйте снова.",
-                QMessageBox.Ok
+                "Не удалось открыть окно преподавателя. Попробуйте позже."
             )
-            self.password_input.clear()
-            self.password_input.setFocus()
+
+    def mousePressEvent(self, event):
+        """Обработчик нажатия кнопки мыши для перемещения окна"""
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.drag_position = event.globalPos() - self.frameGeometry().topLeft()
+            event.accept()
+
+    def mouseMoveEvent(self, event):
+        """Обработчик перемещения мыши для перемещения окна"""
+        if event.buttons() & Qt.MouseButton.LeftButton:
+            self.move(event.globalPos() - self.drag_position)
+            event.accept()

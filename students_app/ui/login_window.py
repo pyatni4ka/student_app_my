@@ -1,57 +1,58 @@
 """Окно входа в систему"""
 import os
-import sys
 import re
 import json
 from datetime import datetime
-from typing import Optional
 from PyQt5.QtWidgets import (
-    QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
-    QLabel, QLineEdit, QPushButton, QMessageBox, QGraphicsOpacityEffect,
-    QGraphicsDropShadowEffect, QFrame
+    QMainWindow, QLabel, QLineEdit, QPushButton, QMessageBox, QGraphicsOpacityEffect, QFileDialog
 )
 from PyQt5.QtCore import (
-    Qt, QSize, QTimer, QPropertyAnimation, QEasingCurve,
-    pyqtSignal, pyqtSlot
+    Qt, QPropertyAnimation, pyqtSignal
 )
-from PyQt5.QtGui import QPixmap, QIcon, QKeyEvent, QColor, QFont
-from ui.styles import STYLES
-from ui.window_manager import WindowManager
+from PyQt5.QtGui import QPixmap, QIcon, QKeyEvent
+from PyQt5 import uic
+from ui.lab_selection import LabSelectionWindow
+from database.db_manager import DatabaseManager
+from loguru import logger
 
 class LoginWindow(QMainWindow):
     """Окно входа в систему"""
-    
+
     # Сигналы для валидации
     validation_complete = pyqtSignal(bool)
-    
-    def __init__(self):
-        super().__init__()
-        
-        # Настройки окна
-        self.setWindowTitle("Система тестирования | МГТУ им. Н.Э. Баумана")
-        self.setFixedSize(1200, 700)  # Фиксированный размер окна
-        self.setStyleSheet(STYLES)
-        
-        # Загружаем иконки
-        icon_path = os.path.join("resources", "icons")
-        self.setWindowIcon(QIcon(os.path.join(icon_path, "bmstu_logo.png")))
-        
+
+    def __init__(self, db_manager: DatabaseManager, parent=None, timestamp: str = '2024-12-09T11:39:27+03:00'):
+        super().__init__(parent)
+
+        # Load the UI file
+        uic.loadUi(os.path.join(os.path.dirname(__file__), 'forms', 'login_window.ui'), self)
+
+        # Загружаем логотип
+        logo_label = self.findChild(QLabel, 'logo_label')
+        logo_path = os.path.join("resources", "icons", "bmstu_logo.png")
+        if os.path.exists(logo_path):
+            try:
+                logo_pixmap = QPixmap(logo_path)
+                logo_label.setPixmap(logo_pixmap)
+            except Exception as e:
+                logger.error(f"Ошибка при загрузке логотипа: {e}")
+
+        # Инициализация базы данных
+        self.db_manager = db_manager
+
         # Словарь для хранения сообщений об ошибках
         self.error_labels = {}
-        
+
         # Путь к файлу с сохраненными данными
         self.settings_file = os.path.join("resources", "settings.json")
-        
+
         # Создаем эффект прозрачности для анимации
         self.opacity_effect = QGraphicsOpacityEffect()
         self.opacity_effect.setOpacity(0)
-        
-        # Инициализируем интерфейс
-        self.setup_ui()
-        
+
         # Загружаем последнюю использованную группу
         self.load_last_group()
-        
+
         # Анимация появления окна
         self.setWindowOpacity(0)
         self.animation = QPropertyAnimation(self, b"windowOpacity")
@@ -59,315 +60,243 @@ class LoginWindow(QMainWindow):
         self.animation.setStartValue(0)
         self.animation.setEndValue(1)
         self.animation.start()
-        
-    def setup_ui(self):
-        """Настройка интерфейса"""
-        # Создаем основной виджет и компоновщик
-        central_widget = QWidget()
-        self.setCentralWidget(central_widget)
-        main_layout = QHBoxLayout(central_widget)
-        main_layout.setContentsMargins(0, 0, 0, 0)
-        main_layout.setSpacing(0)
-        
-        # Создаем левую панель
-        left_panel = QFrame()
-        left_panel.setObjectName("left-panel")
-        left_layout = QVBoxLayout(left_panel)
-        left_layout.setContentsMargins(50, 50, 50, 50)
-        left_layout.setSpacing(20)
-        
-        # Добавляем логотип
-        logo_label = QLabel()
-        logo_label.setObjectName("logo")
-        logo_pixmap = QPixmap(os.path.join("resources", "icons", "bmstu_logo.png"))
-        if not logo_pixmap.isNull():
-            logo_pixmap = logo_pixmap.scaled(150, 150, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
-            logo_label.setPixmap(logo_pixmap)
-        logo_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        left_layout.addWidget(logo_label)
-        
-        # Добавляем заголовок
-        title_label = QLabel("Система тестирования")
-        title_label.setObjectName("title-label")
-        title_label.setFont(QFont("Segoe UI", 32, QFont.Weight.Bold))
-        title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        left_layout.addWidget(title_label)
-        
-        # Добавляем подзаголовок
-        subtitle_label = QLabel("МГТУ им. Н.Э. Баумана")
-        subtitle_label.setObjectName("subtitle-label")
-        subtitle_label.setFont(QFont("Segoe UI", 24))
-        subtitle_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        left_layout.addWidget(subtitle_label)
-        
-        # Добавляем описание
-        description_label = QLabel("Лабораторный практикум\nпо электротехнике")
-        description_label.setObjectName("welcome-label")
-        description_label.setFont(QFont("Segoe UI", 18))
-        description_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        left_layout.addWidget(description_label)
-        
-        main_layout.addWidget(left_panel)
-        
-        # Создаем правую панель
-        right_panel = QFrame()
-        right_panel.setObjectName("right-panel")
-        right_layout = QVBoxLayout(right_panel)
-        right_layout.setContentsMargins(50, 50, 50, 50)
-        right_layout.setSpacing(20)
-        
-        # Создаем форму входа
-        form_widget = QFrame()
-        form_widget.setObjectName("form-widget")
-        form_layout = QVBoxLayout(form_widget)
-        form_layout.setSpacing(15)
-        
-        # Добавляем поля ввода
-        for field_type, label_text in [
-            ("surname", "Фамилия"),
-            ("name", "Имя"),
-            ("group", "Группа")
-        ]:
-            # Заголовок поля
-            label = QLabel(label_text)
-            label.setObjectName("input-label")
-            form_layout.addWidget(label)
-            
-            # Контейнер для поля ввода и иконки
-            input_container = QHBoxLayout()
-            input_container.setSpacing(0)
-            input_container.setContentsMargins(0, 0, 0, 0)
-            
-            # Иконка
-            icon_label = QLabel()
-            icon_label.setObjectName("icon")
-            icon_name = "user.svg" if field_type in ["surname", "name"] else "group.svg"
-            icon_pixmap = QPixmap(os.path.join("resources", "icons", icon_name))
-            if not icon_pixmap.isNull():
-                icon_pixmap = icon_pixmap.scaled(32, 32, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
-                icon_label.setPixmap(icon_pixmap)
-            input_container.addWidget(icon_label)
-            
-            # Поле ввода
-            input_field = QLineEdit()
-            input_field.setObjectName("input-field")
-            if field_type == "group":
-                input_field.setPlaceholderText("Например: ПС4-51")
-                setattr(self, "group_input", input_field)
-                input_field.textChanged.connect(self.validate_group)
-            else:
-                input_field.setPlaceholderText("Введите " + label_text.lower())
-                setattr(self, f"{field_type}_input", input_field)
-                input_field.textChanged.connect(
-                    lambda text, field=input_field, type=field_type: 
-                    self.validate_name(field, type)
-                )
-            input_container.addWidget(input_field)
-            
-            form_layout.addLayout(input_container)
-            
-            # Метка для ошибок
-            error_label = QLabel()
-            error_label.setObjectName("error-label")
-            self.error_labels[field_type] = error_label
-            form_layout.addWidget(error_label)
-        
-        right_layout.addWidget(form_widget)
-        
-        # Добавляем кнопки
-        buttons_layout = QVBoxLayout()
-        buttons_layout.setSpacing(10)
-        
-        # Кнопка входа
-        self.login_button = QPushButton("Войти")
-        self.login_button.setObjectName("login-button")
-        self.login_button.clicked.connect(self.handle_login)
-        buttons_layout.addWidget(self.login_button)
-        
-        # Кнопка входа для преподавателя
-        self.teacher_button = QPushButton("Вход для преподавателя")
-        self.teacher_button.setObjectName("teacher-button")
-        self.teacher_button.clicked.connect(self.handle_teacher_login)
-        buttons_layout.addWidget(self.teacher_button)
-        
-        right_layout.addLayout(buttons_layout)
-        
-        # Добавляем текущий год
-        year_label = QLabel(f"Текущий год: {datetime.now().year}")
-        year_label.setObjectName("year-label")
-        year_label.setAlignment(Qt.AlignmentFlag.AlignRight)
-        right_layout.addWidget(year_label)
-        
-        main_layout.addWidget(right_panel)
-        
-        # Добавляем эффект тени для окна
-        shadow = QGraphicsDropShadowEffect(self)
-        shadow.setBlurRadius(20)
-        shadow.setXOffset(0)
-        shadow.setYOffset(0)
-        shadow.setColor(QColor(0, 0, 0, 50))
-        self.setGraphicsEffect(shadow)
 
-    @pyqtSlot()
-    def on_text_changed(self, text):
-        """Обработчик изменения текста"""
-        sender = self.sender()
-        if isinstance(sender, QLineEdit):
-            if sender == self.group_input:
-                self.validate_group()
-            else:
-                field_type = "surname" if sender == self.surname_input else "name"
-                self.validate_name(sender, field_type)
+        # Настройки окна
+        self.setWindowTitle("Система тестирования | МГТУ им. Н.Э. Баумана")
+        self.setFixedSize(1200, 700)  # Фиксированный размер окна
 
-    def animate_appearance(self):
-        """Анимация появления окна"""
-        self.animation = QPropertyAnimation(self.opacity_effect, b"opacity")
-        self.animation.setDuration(500)
-        self.animation.setStartValue(0)
-        self.animation.setEndValue(1)
-        self.animation.setEasingCurve(QEasingCurve.InOutQuad)
-        self.animation.start()
-    
-    def animate_exit(self, callback=None):
-        """Анимация исчезновения окна"""
-        self.exit_animation = QPropertyAnimation(self.opacity_effect, b"opacity")
-        self.exit_animation.setDuration(500)
-        self.exit_animation.setStartValue(1)
-        self.exit_animation.setEndValue(0)
-        self.exit_animation.setEasingCurve(QEasingCurve.InOutQuad)
-        if callback:
-            self.exit_animation.finished.connect(callback)
-        self.exit_animation.start()
-    
-    def load_last_group(self):
+        # Загружаем иконки
+        icon_path = os.path.join("resources", "icons")
+        icon_file = os.path.join(icon_path, "bmstu_logo.png")
+        if os.path.exists(icon_file):
+            try:
+                self.setWindowIcon(QIcon(icon_file))
+            except Exception as e:
+                logger.error(f"Ошибка при загрузке иконки окна: {e}")
+
+        # Устанавливаем фокус на поле фамилии
+        self.findChild(QLineEdit, 'surname_input').setFocus()
+
+        # Подключаем валидацию полей
+        self.findChild(QLineEdit, 'surname_input').textChanged.connect(self.validate_surname)
+        self.findChild(QLineEdit, 'name_input').textChanged.connect(self.validate_name)
+        self.findChild(QLineEdit, 'group_input').textChanged.connect(self.validate_group)
+
+        # Remove teacher login button if exists
+        teacher_button = self.findChild(QPushButton, 'teacher_button')
+        if teacher_button:
+            teacher_button.hide()
+            teacher_button.deleteLater()
+
+        # Подключаем кнопку входа
+        self.login_button = self.findChild(QPushButton, 'login_button')
+        if self.login_button:
+            self.login_button.clicked.connect(self.validate_and_login)
+
+        # Подключаем кнопку экспорта PDF
+        self.export_pdf_button = self.findChild(QPushButton, 'export_pdf_button')
+        if self.export_pdf_button:
+            self.export_pdf_button.clicked.connect(self.export_to_pdf)
+
+        # Устанавливаем текущую локальную дату и время
+        self.current_time = datetime.now().isoformat() + '+03:00'
+
+        logger.info("Окно входа инициализировано")
+
+    def validate_surname(self, text: str = None) -> bool:
+        """Валидация фамилии"""
+        if text is None:
+            text = self.findChild(QLineEdit, 'surname_input').text().strip()
+        error_label = self.findChild(QLabel, 'surname_error')
+        if not error_label:
+            return True
+
+        if not text:
+            error_label.setText("Поле обязательно для заполнения")
+            return False
+
+        if not re.match(r'^[А-ЯЁ][а-яё]+(-[А-ЯЁ][а-яё]+)?$', text):
+            error_label.setText("Только русские буквы, первая заглавная")
+            return False
+
+        error_label.setText("")
+        return True
+
+    def validate_name(self, text: str = None) -> bool:
+        """Валидация имени"""
+        if text is None:
+            text = self.findChild(QLineEdit, 'name_input').text().strip()
+        error_label = self.findChild(QLabel, 'name_error')
+        if not error_label:
+            return True
+
+        if not text:
+            error_label.setText("Поле обязательно для заполнения")
+            return False
+
+        if not re.match(r'^[А-ЯЁ][а-яё]+(-[А-ЯЁ][а-яё]+)?$', text):
+            error_label.setText("Только русские буквы, первая заглавная")
+            return False
+
+        error_label.setText("")
+        return True
+
+    def validate_group(self, text: str = None) -> bool:
+        """Валидация номера группы"""
+        if text is None:
+            text = self.findChild(QLineEdit, 'group_input').text()
+        text = text.strip().upper()
+
+        error_label = self.findChild(QLabel, 'group_error')
+        if not error_label:
+            return True
+
+        # Проверка на пустое значение
+        if not text:
+            error_label.setText("Поле обязательно для заполнения")
+            return False
+
+        # Проверка формата
+        if not re.match(r'^[А-Я]{2}\d{1,2}-\d{2}[А-Я]?$', text):
+            error_label.setText("Формат: ПС4-51")
+            return False
+
+        error_label.setText("")
+        return True
+
+    def show_error(self, message: str):
+        """Показать сообщение об ошибке"""
+        error_box = QMessageBox(self)
+        error_box.setIcon(QMessageBox.Critical)
+        error_box.setWindowTitle("Ошибка")
+        error_box.setText(message)
+        error_box.exec_()
+
+    def validate_and_login(self):
+        """Проверка введенных данных и вход в систему"""
+        group = self.findChild(QLineEdit, 'group_input').text().strip()
+        surname = self.findChild(QLineEdit, 'surname_input').text().strip()
+        name = self.findChild(QLineEdit, 'name_input').text().strip()
+
+        # Проверка наличия всех данных
+        if not all([group, surname, name]):
+            self.show_error("Пожалуйста, заполните все поля")
+            return
+
+        # Проверка формата группы
+        if not re.match(r'^[А-Я]{2}\d{1,2}-\d{2}[А-Я]?$', group):
+            self.show_error("Неверный формат группы (например: ПС4-51)")
+            self.findChild(QLineEdit, 'group_input').setFocus()
+            return
+
+        # Создаем имя пользователя
+        username = f"{surname} {name}"
+
+        # Проверяем существует ли пользователь
+        user = self.db_manager.verify_user(username)
+
+        if user is None:
+            # Если пользователя нет, создаем новую учетную запись
+            if self.create_new_account(username, group):
+                QMessageBox.information(self, "Успех", "Учетная запись успешно создана!")
+                user = self.db_manager.verify_user(username)
+            else:
+                self.show_error("Не удалось создать учетную запись")
+                return
+
+        # Если все проверки пройдены, сохраняем данные и открываем главное окно
+        self.save_last_group(group)
+
+        # Открываем окно выбора лабораторных работ
+        self.lab_window = LabSelectionWindow(user, self.db_manager)
+        self.lab_window.show()
+        self.close()
+
+    def create_new_account(self, username: str, group: str) -> bool:
+        """Создание новой учетной записи"""
+        try:
+            # В данном случае пароль не нужен, так как авторизация по ФИО
+            return self.db_manager.add_user(username=username,
+                                          password="",
+                                          group_number=group,
+                                          role='student')
+        except Exception as e:
+            logger.error(f"Ошибка при создании учетной записи: {e}")
+            return False
+
+    def load_last_group(self) -> None:
         """Загрузка последней использованной группы"""
         try:
             if os.path.exists(self.settings_file):
                 with open(self.settings_file, 'r', encoding='utf-8') as f:
-                    content = f.read().strip()
-                    if content:  # Проверяем, что файл не пустой
-                        settings = json.loads(content)
-                        last_group = settings.get('last_group', '')
-                        if last_group and self.is_valid_group(last_group):
-                            self.group_input.setText(last_group)
+                    settings = json.load(f)
+                    last_group = settings.get('last_group', '')
+                    if last_group:
+                        group_input = self.findChild(QLineEdit, 'group_input')
+                        if group_input:
+                            group_input.setText(last_group)
         except Exception as e:
-            print(f"Ошибка при загрузке настроек: {e}")
-    
-    def save_last_group(self, group):
+            logger.error(f"Ошибка при загрузке последней группы: {e}")
+
+    def save_last_group(self, group: str) -> None:
         """Сохранение последней использованной группы"""
         try:
-            # Создаем директорию, если она не существует
-            os.makedirs(os.path.dirname(self.settings_file), exist_ok=True)
-            
-            # Читаем существующие настройки или создаем новые
             settings = {}
             if os.path.exists(self.settings_file):
-                try:
-                    with open(self.settings_file, 'r', encoding='utf-8') as f:
-                        content = f.read().strip()
-                        if content:  # Проверяем, что файл не пустой
-                            settings = json.loads(content)
-                except json.JSONDecodeError:
-                    # Если файл поврежден, начинаем с пустого словаря
-                    settings = {}
-            
-            # Обновляем настройки
+                with open(self.settings_file, 'r', encoding='utf-8') as f:
+                    settings = json.load(f)
             settings['last_group'] = group
-            
-            # Сохраняем настройки
+            os.makedirs(os.path.dirname(self.settings_file), exist_ok=True)
             with open(self.settings_file, 'w', encoding='utf-8') as f:
-                json.dump(settings, f, ensure_ascii=False, indent=2)
+                json.dump(settings, f, ensure_ascii=False, indent=4)
         except Exception as e:
-            print(f"Ошибка при сохранении настроек: {e}")
-    
-    def is_valid_group(self, group):
-        """Проверка валидности номера группы"""
-        valid_groups = ['ПС4-41', 'ПС4-51', 'ПС4-42', 'ПС4-52', 'ПС2-41', 'ПС2-51']
-        return group in valid_groups
-    
-    @pyqtSlot()
-    def validate_group(self) -> None:
-        """Проверка группы"""
-        text = self.group_input.text()
-        if not text:
-            self.error_labels["group"].setText("")
-            self.group_input.setStyleSheet("")
-            self.validation_complete.emit(False)
-            return
-            
-        pattern = r'^[А-ЯЁ]{2}\d{1}-\d{2}[А-ЯЁ]?$'
-        if not re.match(pattern, text):
-            self.error_labels["group"].setText("Неверный формат группы")
-            self.group_input.setStyleSheet("border-color: #dc3545;")
-            self.validation_complete.emit(False)
-            return
-            
-        self.error_labels["group"].setText("")
-        self.group_input.setStyleSheet("border-color: #28a745;")
-        self.validation_complete.emit(True)
+            logger.error(f"Ошибка при сохранении последней группы: {e}")
 
-    @pyqtSlot(QLineEdit, str)
-    def validate_name(self, field: QLineEdit, field_type: str) -> None:
-        """Проверка имени/фамилии"""
-        text = field.text()
-        if not text:
-            self.error_labels[field_type].setText("")
-            field.setStyleSheet("")
-            self.validation_complete.emit(False)
-            return
-            
-        if not text.replace(" ", "").isalpha():
-            self.error_labels[field_type].setText("Допустимы только буквы")
-            field.setStyleSheet("border-color: #dc3545;")
-            self.validation_complete.emit(False)
-            return
-            
-        self.error_labels[field_type].setText("")
-        field.setStyleSheet("border-color: #28a745;")
-        self.validation_complete.emit(True)
+    def export_to_pdf(self) -> None:
+        """Экспорт данных в PDF"""
+        try:
+            group = self.findChild(QLineEdit, 'group_input').text().strip()
+            surname = self.findChild(QLineEdit, 'surname_input').text().strip()
+            name = self.findChild(QLineEdit, 'name_input').text().strip()
+            if not all([group, surname, name]):
+                self.show_error("Заполните все поля перед экспортом")
+                return
+            file_dialog = QFileDialog(self)
+            file_dialog.setDefaultSuffix("pdf")
+            file_path, _ = file_dialog.getSaveFileName(
+                self,
+                "Сохранить PDF",
+                f"{surname}_{name}_{group}.pdf",
+                "PDF Files (*.pdf)"
+            )
+            if not file_path:
+                return
+            from reportlab.pdfgen import canvas
+            from reportlab.lib.pagesizes import A4
+            c = canvas.Canvas(file_path, pagesize=A4)
+            c.setTitle(f"Данные студента {surname} {name}")
+            c.drawString(100, 750, f"Группа: {group}")
+            c.drawString(100, 730, f"Фамилия: {surname}")
+            c.drawString(100, 710, f"Имя: {name}")
+            c.drawString(100, 690, f"Дата: {datetime.now().strftime('%d.%m.%Y')}")
+            c.save()
+            QMessageBox.information(self, "Успех", "PDF файл успешно создан!")
+        except Exception as e:
+            logger.error(f"Ошибка при экспорте в PDF: {e}")
+            self.show_error("Не удалось создать PDF файл")
 
-    def keyPressEvent(self, a0: Optional[QKeyEvent]) -> None:
-        """Обработка нажатия клавиш"""
-        if a0 and a0.key() in [Qt.Key.Key_Return, Qt.Key.Key_Enter]:
-            self.handle_login()
+    def keyPressEvent(self, event: QKeyEvent) -> None:
+        """Обработка нажатий клавиш"""
+        if event.key() == Qt.Key_Return or event.key() == Qt.Key_Enter:
+            self.validate_and_login()
+        elif event.key() == Qt.Key_Escape:
+            self.close()
         else:
-            super().keyPressEvent(a0)
+            super().keyPressEvent(event)
 
-    def show_error(self, field_type, message):
-        """Показать сообщение об ошибке"""
-        self.error_labels[field_type].setText(message)
-        
-    def clear_error(self, field_type):
-        """Очистить сообщение об ошибке"""
-        self.error_labels[field_type].clear()
-        
-    def validate_all(self):
-        """Проверка всех полей"""
-        return all([
-            self.validate_name(self.surname_input, "surname"),
-            self.validate_name(self.name_input, "name"),
-            self.validate_group()
-        ])
-        
-    @pyqtSlot()
-    def handle_login(self) -> None:
-        """Обработка входа студента"""
-        if not self.validate_all():
-            return
-
-        student_data = {
-            'name': self.name_input.text().strip(),
-            'surname': self.surname_input.text().strip(),
-            'group': self.group_input.text().strip().upper()
-        }
-        
-        # Переход к окну выбора лабораторных работ
-        from ui.lab_selection import LabSelectionWindow
-        lab_selection = LabSelectionWindow(**student_data)
-        WindowManager().show_window(lab_selection)
-    
-    @pyqtSlot()
-    def handle_teacher_login(self) -> None:
-        """Обработка входа для преподавателя"""
-        from ui.teacher_login_window import TeacherLoginWindow
-        WindowManager().show_window(TeacherLoginWindow)
+    def closeEvent(self, event) -> None:
+        """Обработка закрытия окна"""
+        group = self.findChild(QLineEdit, 'group_input').text().strip()
+        if group:
+            self.save_last_group(group)
+        event.accept()

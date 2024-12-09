@@ -10,7 +10,7 @@ class ArchiveManager:
     def __init__(self, archive_file="archive.json"):
         self.archive_file = archive_file
         self.archived_data = self.load_archive()
-    
+
     def load_archive(self):
         """Загрузка архива из файла"""
         if os.path.exists(self.archive_file):
@@ -20,12 +20,12 @@ class ArchiveManager:
             except Exception:
                 return []
         return []
-    
+
     def save_archive(self):
         """Сохранение архива в файл"""
         with open(self.archive_file, 'w', encoding='utf-8') as f:
             json.dump(self.archived_data, f, ensure_ascii=False, indent=2)
-    
+
     def archive_items(self, items):
         """Архивация элементов"""
         archive_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -36,7 +36,7 @@ class ArchiveManager:
             }
             self.archived_data.append(archived_item)
         self.save_archive()
-    
+
     def get_archived_items(self):
         """Получение архивированных элементов"""
         return self.archived_data
@@ -45,7 +45,7 @@ class ArchiveManager:
         """Архивация с сжатием"""
         serialized = pickle.dumps(data)
         compressed = gzip.compress(serialized, compress_level)
-        
+
         archive_record = {
             "data": compressed,
             "timestamp": datetime.now().isoformat(),

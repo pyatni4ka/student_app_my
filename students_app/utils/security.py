@@ -3,8 +3,8 @@
 """
 
 import os
-from datetime import datetime, timedelta
-from typing import Optional
+from datetime import datetime, timedelta, timezone
+from typing import Dict, Any, Optional, TypeVar
 
 import bcrypt
 from jose import jwt
@@ -17,6 +17,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key-here")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24  # 24 часа
 
+T = TypeVar('T')
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """Проверяет соответствие пароля хешу"""
@@ -32,13 +33,13 @@ def get_password_hash(password: str) -> str:
     return bcrypt.hashpw(password.encode('utf-8'), salt).decode('utf-8')
 
 
-def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
+def create_access_token(data: Dict[str, Any], expires_delta: Optional[timedelta] = None) -> str:
     """Создает JWT токен"""
     to_encode = data.copy()
     if expires_delta:
-        expire = datetime.utcnow() + expires_delta
+        expire = datetime.now(timezone.utc) + expires_delta
     else:
-        expire = datetime.utcnow() + timedelta(minutes=15)
+        expire = datetime.now(timezone.utc) + timedelta(minutes=15)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
@@ -63,6 +64,6 @@ def get_current_user(db: Session, token: str) -> Optional[User]:
             return None
     except jwt.JWTError:
         return None
-    
+
     user = db.query(User).filter(User.username == username).first()
     return user

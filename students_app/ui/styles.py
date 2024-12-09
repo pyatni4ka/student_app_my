@@ -18,6 +18,12 @@ QMainWindow {
     padding: 20px;
 }
 
+#form-container {
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+}
+
 #logo {
     margin-bottom: 30px;
 }
@@ -38,31 +44,28 @@ QMainWindow {
 #welcome-label {
     color: #e6f2ff;
     font-size: 18px;
-    line-height: 1.5;
 }
 
-#input-label {
+#error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+QLabel {
     color: #333333;
-    font-size: 18px;
-    font-weight: 500;
-    margin-top: 15px;
-    margin-bottom: 8px;
+    font-size: 16px;
+    margin-bottom: 5px;
 }
 
 QLineEdit {
-    padding: 15px 15px 15px 45px;
+    padding: 12px;
     border: 2px solid #e0e0e0;
     border-radius: 8px;
     background-color: white;
     font-size: 16px;
     color: #333333;
     min-height: 25px;
-}
-
-QLineEdit::placeholder {
-    color: #6c757d;
-    font-size: 16px;
-    font-weight: 400;
 }
 
 QLineEdit:focus {
@@ -82,63 +85,141 @@ QPushButton {
     font-size: 16px;
     font-weight: bold;
     min-width: 150px;
-    margin-top: 20px;
+    margin: 5px;
 }
 
-#login-button {
+#primary-button {
     background-color: #2196F3;
     color: white;
 }
 
-#login-button:hover {
+#primary-button:hover {
     background-color: #1976D2;
 }
 
-#login-button:pressed {
+#primary-button:pressed {
     background-color: #0D47A1;
 }
 
-#teacher-button {
+#secondary-button {
     background-color: #f8f9fa;
-    color: #333333;
-    border: 2px solid #e0e0e0;
+    color: #2196F3;
+    border: 2px solid #2196F3;
 }
 
-#teacher-button:hover {
+#secondary-button:hover {
     background-color: #e9ecef;
 }
 
-#teacher-button:pressed {
+#secondary-button:pressed {
     background-color: #dee2e6;
 }
 
-#error-label {
-    color: #dc3545;
-    font-size: 13px;
-    min-height: 20px;
-    padding: 4px 0;
-}
-
-#year-label {
-    color: #6c757d;
+QListWidget {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #ffffff;
+    padding: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 14px;
-    margin-top: 30px;
+    color: #333;
 }
 
-#form-widget {
-    background-color: white;
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+QListWidget::item {
+    margin: 10px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-#icon {
-    margin: 0 8px;
-    min-width: 32px;
+QListWidget::item:hover {
+    background-color: #e0f7fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.input-container {
-    position: relative;
-    margin-bottom: 20px;
+QListWidget::item:selected {
+    background-color: #00acc1;
+    border-color: #00838f;
+    color: #fff;
+}
+
+QLabel {
+    color: #2c3e50;
+    font-family: Arial;
+    font-size: 12pt;
+}
+QLabel.lab_title {
+    font-weight: bold;
+}
+
+QPushButton {
+    background-color: #3498db;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 12pt;
+    font-family: Arial;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+"""
+
+LIST_WIDGET_STYLE = """
+QListWidget {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #ffffff;
+    padding: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+QListWidget::item {
+    margin: 10px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+QListWidget::item:hover {
+    background-color: #e0f7fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+QListWidget::item:selected {
+    background-color: #00acc1;
+    border-color: #00838f;
+    color: #fff;
+}
+"""
+
+ITEM_LABEL_STYLE = """
+QLabel {
+    color: #2c3e50;
+    font-family: Arial;
+    font-size: 12pt;
+}
+QLabel.lab_title {
+    font-weight: bold;
+}
+"""
+
+BUTTON_STYLE = """
+QPushButton {
+    background-color: #3498db;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 12pt;
+    font-family: Arial;
+}
+QPushButton:hover {
+    background-color: #2980b9;
 }
 """

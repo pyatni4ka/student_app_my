@@ -7,7 +7,7 @@ class Database:
         """Инициализация базы данных"""
         self.db_path = db_path
         self.init_db()
-    
+
     def init_db(self):
         """Расширенная инициализация базы данных"""
         with sqlite3.connect(self.db_path) as conn:
@@ -40,7 +40,7 @@ class Database:
                 )
             ''')
             conn.commit()
-    
+
     def add_student(self, group, name, date):
         """Добавление записи о посещении студента"""
         with sqlite3.connect(self.db_path) as conn:
@@ -50,26 +50,26 @@ class Database:
                 (group, name, date)
             )
             conn.commit()
-    
+
     def get_all_students(self):
         """Получение всех записей"""
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
             cursor.execute('SELECT group_name, student_name, visit_date FROM students')
             return [{'group': row[0], 'name': row[1], 'date': row[2]} for row in cursor.fetchall()]
-    
+
     def search_students(self, query):
         """Поиск студентов по имени или группе"""
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
             cursor.execute(
-                '''SELECT group_name, student_name, visit_date 
-                   FROM students 
+                '''SELECT group_name, student_name, visit_date
+                   FROM students
                    WHERE student_name LIKE ? OR group_name LIKE ?''',
                 (f'%{query}%', f'%{query}%')
             )
             return [{'group': row[0], 'name': row[1], 'date': row[2]} for row in cursor.fetchall()]
-    
+
     def get_students_by_group(self, group):
         """Получение студентов определенной группы"""
         with sqlite3.connect(self.db_path) as conn:
@@ -79,21 +79,21 @@ class Database:
                 (group,)
             )
             return [{'group': row[0], 'name': row[1], 'date': row[2]} for row in cursor.fetchall()]
-    
+
     def get_groups(self):
         """Получение списка всех групп"""
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
             cursor.execute('SELECT DISTINCT group_name FROM students')
             return [row[0] for row in cursor.fetchall()]
-    
+
     def clear_all(self):
         """Очистка всех данных (для тестов)"""
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
             cursor.execute('DELETE FROM students')
             conn.commit()
-    
+
     def start_session(self, student_id):
         """Начало сессии работы студента"""
         with sqlite3.connect(self.db_path) as conn:
@@ -112,7 +112,7 @@ class Database:
                 'UPDATE sessions SET end_time = ? WHERE id = ?',
                 (datetime.now().isoformat(), session_id)
             )
-    
+
     def __del__(self):
         """Очистка тестовой базы данных при завершении"""
         if os.path.exists(self.db_path) and self.db_path == 'test.db':

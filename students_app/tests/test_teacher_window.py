@@ -20,13 +20,13 @@ class TestTeacherWindow(QtTestCase):
         self.assertIsNotNone(self.teacher_window.student_table)
         self.assertIsNotNone(self.teacher_window.search_input)
         self.assertIsNotNone(self.teacher_window.filter_group_combo)
-        
+
     def test_table_columns(self):
         """Тест наличия всех необходимых столбцов в таблице"""
         headers = []
         for i in range(self.teacher_window.student_table.columnCount()):
             headers.append(self.teacher_window.student_table.horizontalHeaderItem(i).text())
-        
+
         required_headers = ["Группа", "ФИО", "Дата"]
         for header in required_headers:
             self.assertIn(header, headers)
@@ -40,7 +40,7 @@ class TestTeacherWindow(QtTestCase):
         ]
         for group, name, date in test_data:
             self.teacher_window.add_student_to_table(group, name, date)
-        
+
         # Тестируем поиск
         self.enter_text(self.teacher_window.search_input, "Иван")
         self.assertEqual(self._get_visible_rows(), 1)
@@ -54,7 +54,7 @@ class TestTeacherWindow(QtTestCase):
         ]
         for group, name, date in test_data:
             self.teacher_window.add_student_to_table(group, name, date)
-        
+
         # Выбираем группу в фильтре
         self.select_combo_item(self.teacher_window.filter_group_combo, "ПИ-231")
         self.assertEqual(self._get_visible_rows(), 1)
@@ -63,7 +63,7 @@ class TestTeacherWindow(QtTestCase):
         """Тест функциональности экспорта данных"""
         # Добавляем тестовые данные
         self.teacher_window.add_student_to_table("ПИ-231", "Иван Иванов", "2023-12-08")
-        
+
         # Проверяем наличие кнопки экспорта
         export_button = None
         for button in self.teacher_window.findChildren(QPushButton):

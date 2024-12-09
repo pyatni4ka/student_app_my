@@ -1,4 +1,0 @@
-models
-tests
-ui
-utils

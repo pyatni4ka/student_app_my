@@ -7,7 +7,7 @@ from PyQt5.QtCore import Qt
 
 class QtTestCase(unittest.TestCase):
     """Базовый класс для тестов с поддержкой Qt"""
-    
+
     @classmethod
     def setUpClass(cls):
         """Инициализация Qt приложения перед запуском тестов"""
@@ -16,12 +16,12 @@ class QtTestCase(unittest.TestCase):
         if not cls.app:
             # Создаем новый экземпляр приложения
             cls.app = QApplication(sys.argv)
-        
+
         # Убеждаемся, что у нас есть QGuiApplication
         cls.gui_app = QGuiApplication.instance()
         if not cls.gui_app:
             cls.gui_app = QGuiApplication(sys.argv)
-    
+
     @classmethod
     def tearDownClass(cls):
         """Очистка после завершения тестов"""

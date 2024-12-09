@@ -2,95 +2,136 @@
 Главный файл приложения
 """
 
-import os
 import sys
-import logging
+import platform
 import argparse
-from pathlib import Path
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtCore import Qt, QCoreApplication
-from PyQt5.QtCore import QT_VERSION_STR
-from PyQt5.QtNetwork import QLocalServer, QLocalSocket
-from ui.login_window import LoginWindow
-from ui.styles import STYLES
-from ui.window_manager import WindowManager
+from contextlib import contextmanager
+from typing import Generator, Any
+import os
 
-def parse_arguments():
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtCore import QtMsgType, QT_VERSION_STR, PYQT_VERSION_STR, Qt
+from PyQt5.QtNetwork import QLocalServer, QLocalSocket
+
+from ui.login_window import LoginWindow
+from ui.window_manager import WindowManager
+from utils.styles import STYLES
+from utils.logger import setup_logger
+from loguru import logger
+from database.db_manager import DatabaseManager
+
+
+def parse_arguments() -> argparse.Namespace:
     """Обработка аргументов командной строки"""
-    parser = argparse.ArgumentParser(description='Приложение для управления студентами')
-    parser.add_argument('--debug', action='store_true', help='Включить режим отладки')
+    parser = argparse.ArgumentParser(description="Student Application")
+    parser.add_argument("--debug", action="store_true", help="Enable debug mode")
     return parser.parse_args()
 
-def check_single_instance():
-    """Проверка на запуск единственного экземпляра приложения"""
-    socket = QLocalSocket()
-    socket.connectToServer('StudentAppInstance')
-    if socket.waitForConnected(500):
-        socket.close()
-        return False
-    
-    server = QLocalServer()
-    server.removeServer('StudentAppInstance')
-    server.listen('StudentAppInstance')
-    return True
 
-def setup_logging(debug_mode=False):
-    """Настройка системы логирования"""
-    log_level = logging.DEBUG if debug_mode else logging.INFO
-    log_file = Path('app.log')
-    logging.basicConfig(
-        level=log_level,
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-        handlers=[
-            logging.FileHandler(log_file),
-            logging.StreamHandler()
-        ]
-    )
-    return logging.getLogger(__name__)
+def cleanup(app: QApplication) -> None:
+    """Очистка ресурсов перед выходом"""
+    app.quit()
 
-def setup_application():
+
+def setup_application() -> QApplication:
     """Настройка приложения"""
-    # Устанавливаем путь к плагинам Qt перед созданием QApplication
-    qt_plugin_path = os.path.join(os.path.expanduser('~'), 
-                                 'AppData', 'Local', 'Packages',
-                                 'PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0',
-                                 'LocalCache', 'local-packages', 'Python311',
-                                 'site-packages', 'PyQt5', 'Qt5', 'plugins')
-    
-    if os.path.exists(qt_plugin_path):
-        os.environ['QT_PLUGIN_PATH'] = qt_plugin_path
-        logging.info(f"Установлен путь к плагинам Qt: {qt_plugin_path}")
-    else:
-        logging.warning(f"Путь к плагинам Qt не найден: {qt_plugin_path}")
-    
-    # Включаем поддержку High DPI
+    # Устанавливаем атрибуты до создания приложения
     QApplication.setAttribute(Qt.ApplicationAttribute.AA_EnableHighDpiScaling, True)
     QApplication.setAttribute(Qt.ApplicationAttribute.AA_UseHighDpiPixmaps, True)
-    
-    app = QApplication(sys.argv)
+
+    # Создаем приложение
+    if QApplication.instance() is None:
+        app = QApplication(sys.argv)
+    else:
+        app = QApplication.instance()
+
     app.setStyleSheet(STYLES)
+
     return app
 
-def main():
-    """Основная функция приложения"""
-    args = parse_arguments()
-    logger = setup_logging(args.debug)
-    
-    try:
-        if not check_single_instance():
-            logger.warning("Приложение уже запущено")
-            sys.exit(0)
-            
-        app = setup_application()
-        logger.info(f"Qt version: {QT_VERSION_STR}")
-        logger.info(f"QT_PLUGIN_PATH: {os.environ.get('QT_PLUGIN_PATH', 'не установлен')}")
-        
-        WindowManager().show_window(LoginWindow)
-        sys.exit(app.exec_())
-        
-    except Exception as e:
-        logger.critical(f"Критическая ошибка при запуске приложения: {str(e)}", exc_info=True)
+
+@contextmanager
+def single_instance() -> Generator[QLocalServer, None, None]:
+    """Контекстный менеджер для проверки единственного экземпляра приложения"""
+    socket = QLocalSocket()
+    socket.connectToServer("StudentAppInstance")
+
+    if socket.waitForConnected(500):
+        socket.close()
+        logger.warning("Application is already running")
         sys.exit(1)
 
+    server = QLocalServer()
+    server.removeServer("StudentAppInstance")
+    server.listen("StudentAppInstance")
+
+    try:
+        yield server
+    finally:
+        server.close()
+
+
+def qt_message_handler(mode: QtMsgType,
+                         context: Any,
+                         message: str) -> None:
+    """Обработчик сообщений Qt"""
+    if mode == QtMsgType.QtDebugMsg:
+        logger.debug(message)
+    elif mode == QtMsgType.QtInfoMsg:
+        logger.info(message)
+    elif mode == QtMsgType.QtWarningMsg:
+        logger.warning(message)
+    elif mode == QtMsgType.QtCriticalMsg:
+        logger.critical(message)
+    elif mode == QtMsgType.QtFatalMsg:
+        logger.error(message)
+
+
+def main() -> None:
+    """Главная функция приложения"""
+    try:
+        # Создаем приложение
+        app = QApplication.instance()
+        if app is None:
+            app = QApplication(sys.argv)
+
+        # Инициализация логгера
+        setup_logger()
+
+        # Информация о версиях
+        logger.info(f"Qt version: {QT_VERSION_STR}")
+        logger.info(f"PyQt version: {PYQT_VERSION_STR}")
+        logger.info(f"Python version: {platform.python_version()}")
+
+        # Создаем менеджер базы данных
+        db_path = os.path.join(os.path.dirname(__file__), "database", "student_app.db")
+        os.makedirs(os.path.dirname(db_path), exist_ok=True)
+        db_manager = DatabaseManager(db_path)
+
+        # Создаем менеджер окон
+        window_manager = WindowManager()
+
+        # Создаем и показываем окно входа
+        login_window = LoginWindow(db_manager)
+        window_manager.show_window(login_window)
+
+        logger.info("Окно входа создано и отображено")
+
+        # Устанавливаем стили
+        app.setStyleSheet(STYLES)
+
+        logger.info("Запускаем главный цикл приложения")
+        sys.exit(app.exec_())
+
+    except Exception as e:
+        logger.exception(f"Критическая ошибка: {e}")
+        return 1
+
+
 if __name__ == "__main__":
-    main()
+    try:
+        exit_code = main()
+        sys.exit(exit_code)
+    except Exception:
+        logger.exception("Неожиданная ошибка при запуске приложения")
+        sys.exit(1)

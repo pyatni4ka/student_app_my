@@ -1,4 +1,18 @@
 {
+    "include": [
+        "."
+    ],
+    "exclude": [
+        "**/__pycache__",
+        "**/.pytest_cache",
+        "**/.venv",
+        "**/students_app.egg-info"
+    ],
+    "typeCheckingMode": "strict",
+    "useLibraryCodeForTypes": true,
+    "reportMissingTypeStubs": "warning",
+    "reportUnknownMemberType": "warning",
+    "pythonVersion": "3.11",
     "venv": ".venv",
     "venvPath": ".",
     "extraPaths": [

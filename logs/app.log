@@ -1,0 +1,28 @@
+2024-12-08 18:46:09,819 - root - INFO - main.py:72 - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:46:09,836 - __main__ - CRITICAL - main.py:102 - Критическая ошибка при запуске приложения: name 'QT_VERSION_STR' is not defined
+Traceback (most recent call last):
+  File "c:\Users\MrDes\OneDrive\Документы\GitHub\student_app_my\students_app\main.py", line 95, in main
+    logger.info(f"Qt version: {QT_VERSION_STR}")
+                               ^^^^^^^^^^^^^^
+NameError: name 'QT_VERSION_STR' is not defined
+2024-12-08 18:46:47,779 - root - INFO - main.py:73 - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:46:47,794 - __main__ - INFO - main.py:96 - Qt version: 5.15.2
+2024-12-08 18:46:47,795 - __main__ - INFO - main.py:97 - PyQt version: 5.15.9
+2024-12-08 18:46:47,795 - __main__ - INFO - main.py:98 - QT_PLUGIN_PATH: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:46:47,795 - ui.window_manager - INFO - window_manager.py:16 - Создан новый экземпляр WindowManager
+2024-12-08 18:46:47,796 - ui.window_manager - INFO - window_manager.py:28 - Попытка показать окно класса LoginWindow
+2024-12-08 18:46:48,126 - ui.window_manager - INFO - window_manager.py:66 - Успешно показано новое окно класса LoginWindow
+2024-12-08 18:48:20,604 - root - INFO - main.py:73 - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:48:20,620 - __main__ - INFO - main.py:96 - Qt version: 5.15.2
+2024-12-08 18:48:20,620 - __main__ - INFO - main.py:97 - PyQt version: 5.15.9
+2024-12-08 18:48:20,620 - __main__ - INFO - main.py:98 - QT_PLUGIN_PATH: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:48:20,621 - ui.window_manager - INFO - window_manager.py:16 - Создан новый экземпляр WindowManager
+2024-12-08 18:48:20,621 - ui.window_manager - INFO - window_manager.py:28 - Попытка показать окно класса LoginWindow
+2024-12-08 18:48:20,954 - ui.window_manager - INFO - window_manager.py:66 - Успешно показано новое окно класса LoginWindow
+2024-12-08 18:53:07,053 - root - INFO - main.py:73 - Установлен путь к плагинам Qt: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:53:07,069 - __main__ - INFO - main.py:96 - Qt version: 5.15.2
+2024-12-08 18:53:07,070 - __main__ - INFO - main.py:97 - PyQt version: 5.15.9
+2024-12-08 18:53:07,070 - __main__ - INFO - main.py:98 - QT_PLUGIN_PATH: C:\Users\MrDes\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\PyQt5\Qt5\plugins
+2024-12-08 18:53:07,070 - ui.window_manager - INFO - window_manager.py:16 - Создан новый экземпляр WindowManager
+2024-12-08 18:53:07,070 - ui.window_manager - INFO - window_manager.py:28 - Попытка показать окно класса LoginWindow
+2024-12-08 18:53:07,391 - ui.window_manager - INFO - window_manager.py:66 - Успешно показано новое окно класса LoginWindow
